@@ -8,17 +8,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -2067402452, guid: bab6fa851cf5a1a4bba3cec5f191cb8e, type: 3}
+  m_Script: {fileID: -2067402452, guid: 1e108ae5f2133934f948edded555f03e, type: 3}
   m_Name: VuforiaConfiguration
   m_EditorClassIdentifier: 
   vuforia:
     vuforiaLicenseKey: 
-    ufoLicenseKey: QWVSLytkTC8vLy8vQUFBQUtBUjR1ZXFDR1VncnRzeWhKSlJoQkNZd0Y2YTc1eUVRd1FYTFphcWIyclVDLzNQTlZDUDBoRm9tV0V5Y0xnMjBENDdlQUVuRkV0dURXY3kraFUzdEdjUjlpbjlNNEllNHZvWDFnRHQwRHNuV0psWEtxTDJ4Si9KNGozcjU1NDZPY096UlNHMlJ6NFlZSkMxQ2VEM2V2THlubjZQUVV6UWw3V2pTWVFZZzhITnRUeThUYzZjSzVvZUx4NkQwWHcxeXYvQmpKUng0NnIvcDY0ZmQ0dEp4cWd4S0pTdll1blVvZ0RQK29NbUw4eEZkZlcrUlVCcXpqbXdaaVA2SG1JZC83Z2JvejVoQnI1cE9IVkJTMXU4ZzNYSkdPeDRNWnFTTUV5Z1hFbWUzL0Fsb1RvY0xVRnRLbkM0TWNjK3U3T0t5V2Q2UndFN0hxdG5hQnhwcXlWeG1zbWFWWGNrdkt5cjZYWm56VEh0MnBJQmk=
+    ufoLicenseKey: QVpYS0Zmci8vLy8vQUFBQUtLd0FOZXRocjAzUnJRcEVDNy9kcHBzYTQwbmplVmRFVzhIamNiY28xYllqcnFKSGpJSk12NUR3KzJyQU5kNTZhK1kwQWZERUFTUStEY1R3dmt4b2d4TGUyRzRkR2s1emhRUXBRNXlIaUxwa3dvTURGRjZlazV1K2x2UmlTVUl1TVBzeVVacFFSZnR5OEdxNTFrNFBVUnU4LzcwV3Q0OTF5RVZudHpDZWNQa3Zpb1loRldHN3Y2NmJwSFNROXlwTGZYbXl5WFJjUVd0Q2ZpZXF5cEdsWmJXdDZVVGpWNFIyeEhyNys0cVAxNFpldVlETnloMXYxeXV6V1kwM3ZaYlhVRHZVS1VrVEdzajlLdmk1SUY2Q2hRTzdaZExGNElqMTdrY25WRlBqZCtmdVJpYlhEYlUyUVN3UUdjaGM0ZnFWZmxiNkhjWk1oRFNyS2JnSldjWStVTlA2WWtTTFd1WTBUaWZ5eUVoNXVuc1Y=
     delayedInitialization: 0
-    cameraDeviceModeSetting: -3
-    maxSimultaneousImageTargets: 5
-    maxSimultaneousObjectTargets: 5
-    useDelayedLoadingObjectTargets: 1
+    cameraDeviceModeSetting: -1
+    maxSimultaneousImageTargets: 1
+    maxSimultaneousObjectTargets: 1
+    useDelayedLoadingObjectTargets: 0
     cameraDirection: 0
     mirrorVideoBackground: 0
   digitalEyewear:
@@ -45,11 +45,9 @@ MonoBehaviour:
   databaseLoad:
     dataSetsToLoad:
     - VuforiaMars_Images
-    - VuforiaMars_Object_OT
     - VuforiaMars_VuMark
     dataSetsToActivate:
     - VuforiaMars_Images
-    - VuforiaMars_Object_OT
     - VuforiaMars_VuMark
   videoBackground:
     clippingMode: 0
@@ -58,11 +56,6 @@ MonoBehaviour:
       type: 0}
     matteShader: {fileID: 15310, guid: 0000000000000000f000000000000000, type: 0}
     videoBackgroundEnabled: 1
-  smartTerrainTracker:
-    autoInitTracker: 0
-    autoStartTracker: 0
-    autoInitBuilder: 0
-    sceneUnitsToMillimeter: 0
   deviceTracker:
     autoInitTracker: 0
     autoStartTracker: 0
@@ -71,8 +64,11 @@ MonoBehaviour:
     modelCorrectionMode: 0
     modelTransformEnabled: 0
     modelTransform: {x: 0, y: 0.1, z: -0.1}
+  smartTerrain:
+    autoInitTracker: 0
+    autoStartTracker: 0
   webcam:
-    deviceNameSetInEditor: PC Camera
+    deviceNameSetInEditor: 
     flipHorizontally: 0
     turnOffWebCam: 0
     renderTextureLayer: 30
