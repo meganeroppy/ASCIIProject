@@ -45,7 +45,7 @@ Material:
     m_Floats:
     - _ColorMask: 15
     - _DepthBias: 0.00012
-    - _EdgeThickness: 3
+    - _EdgeThickness: 0
     - _FalloffPower: 0.5
     - _SpecularPower: 20
     - _Stencil: 0
