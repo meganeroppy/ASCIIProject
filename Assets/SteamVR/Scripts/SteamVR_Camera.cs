@@ -12,6 +12,8 @@ using Valve.VR;
 [RequireComponent(typeof(Camera))]
 public class SteamVR_Camera : MonoBehaviour
 {
+    public static SteamVR_Camera instance;
+
 	[SerializeField]
 	private Transform _head;
 	public Transform head { get { return _head; } }
@@ -100,6 +102,8 @@ public class SteamVR_Camera : MonoBehaviour
 
 	void Awake()
 	{
+        instance = this;
+
 		camera = GetComponent<Camera>(); // cached to avoid runtime lookup
 		ForceLast();
     }

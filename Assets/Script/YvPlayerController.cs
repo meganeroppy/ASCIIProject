@@ -17,6 +17,7 @@ public class YvPlayerController : NetworkBehaviour
     private IKControl ik;
 
     private SteamVR_ControllerManager stController;
+    private SteamVR_Camera stCamera ;
 
     public override void OnStartLocalPlayer()
     {
@@ -29,7 +30,12 @@ public class YvPlayerController : NetworkBehaviour
         }
 
         ik = GetComponent<IKControl>();
+
+        // ARカメラを無効
+        YvGameManager.instance.ArCamera.SetActive(false);
     }
+
+
 
     void Update()
     {
@@ -52,16 +58,30 @@ public class YvPlayerController : NetworkBehaviour
 
     void UpdatePosition()
     {
-        if( stController == null )
+        // iKinema対応したら体と両足も対応する
+
+        if ( stCamera == null )
+        {
+            stCamera = SteamVR_Camera.instance;
+            if (stCamera == null) return;
+        }
+
+
+        // 頭 回転のみ
+        if(stCamera.camera != null )
+        {
+            ik.headObj.transform.rotation = stCamera.camera.transform.rotation;
+        }
+
+
+        if (stController == null)
         {
             stController = SteamVR_ControllerManager.instance;
             if (stController == null) return;
         }
 
-        // iKinema対応したら体と両足も対応する
-
-        // 両手
-        if( stController.right != null )
+        // 両手　位置と回転
+        if ( stController.right != null )
         {
             ik.rightHandObj.transform.position = stController.right.transform.position;
             ik.rightHandObj.transform.rotation = stController.right.transform.rotation;
