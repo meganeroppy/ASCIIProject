@@ -167,7 +167,7 @@ GameObject:
   - component: {fileID: 114701271368790210}
   - component: {fileID: 114534524494569514}
   m_Layer: 0
-  m_Name: Player
+  m_Name: PlayerAudience
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1695,6 +1695,8 @@ MonoBehaviour:
   bulletPrefab: {fileID: 1992859468219384, guid: c89f7f31c06bb364ca3620fe44e187cc,
     type: 2}
   bulletSpawn: {fileID: 4254843135587198}
+  player: {fileID: 0}
+  anim: {fileID: 0}
 --- !u!114 &114240091708402080
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1834,22 +1836,22 @@ MonoBehaviour:
   m_SceneId:
     m_Value: 0
   m_AssetId:
-    i0: 91
-    i1: 234
-    i2: 186
-    i3: 244
-    i4: 184
-    i5: 173
-    i6: 224
-    i7: 244
-    i8: 74
-    i9: 84
-    i10: 159
-    i11: 181
-    i12: 226
-    i13: 241
-    i14: 219
-    i15: 27
+    i0: 206
+    i1: 45
+    i2: 116
+    i3: 96
+    i4: 63
+    i5: 57
+    i6: 15
+    i7: 84
+    i8: 153
+    i9: 175
+    i10: 254
+    i11: 33
+    i12: 116
+    i13: 248
+    i14: 122
+    i15: 28
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 1
 --- !u!114 &114687638353799504
