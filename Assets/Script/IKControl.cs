@@ -44,8 +44,10 @@ public class IKControl : MonoBehaviour {
 				// Set the right hand target position and rotation, if one has been assigned
 				SetIKPositionWeightAndRotationWeight( AvatarIKGoal.RightHand, rightHandObj );
 				SetIKPositionWeightAndRotationWeight( AvatarIKGoal.LeftHand, leftHandObj );
-				SetIKPositionWeightAndRotationWeight( AvatarIKGoal.RightFoot, rightFootObj );
-				SetIKPositionWeightAndRotationWeight( AvatarIKGoal.LeftFoot, leftFootObj );
+                if( rightFootObj )
+			    	SetIKPositionWeightAndRotationWeight( AvatarIKGoal.RightFoot, rightFootObj );
+                if (leftFootObj)
+                    SetIKPositionWeightAndRotationWeight( AvatarIKGoal.LeftFoot, leftFootObj );
 
 				if( bodyObj )
 				{
@@ -58,8 +60,10 @@ public class IKControl : MonoBehaviour {
 			else {          
 				SetIKPositionWeightAndRotationWeight( AvatarIKGoal.RightHand, null );
 				SetIKPositionWeightAndRotationWeight( AvatarIKGoal.LeftHand, null );
-				SetIKPositionWeightAndRotationWeight( AvatarIKGoal.RightFoot, null );
-				SetIKPositionWeightAndRotationWeight( AvatarIKGoal.LeftFoot, null );
+                if (rightFootObj)
+                    SetIKPositionWeightAndRotationWeight( AvatarIKGoal.RightFoot, null );
+                if (leftFootObj)
+                    SetIKPositionWeightAndRotationWeight( AvatarIKGoal.LeftFoot, null );
 
 				animator.SetLookAtWeight(0);
 			}
