@@ -16,6 +16,8 @@ public class YvPlayerController : NetworkBehaviour
 
     private IKControl ik;
 
+    private SteamVR_ControllerManager stController;
+
     public override void OnStartLocalPlayer()
     {
         base.OnStartLocalPlayer();
@@ -32,6 +34,7 @@ public class YvPlayerController : NetworkBehaviour
     void Update()
     {
         UpdateInput();
+        UpdatePosition();
         UpdateIkObjects();
     }
 
@@ -47,6 +50,29 @@ public class YvPlayerController : NetworkBehaviour
 
     }
 
+    void UpdatePosition()
+    {
+        if( stController == null )
+        {
+            stController = SteamVR_ControllerManager.instance;
+            if (stController == null) return;
+        }
+
+        // iKinema対応したら体と両足も対応する
+
+        // 両手
+        if( stController.right != null )
+        {
+            ik.rightHandObj.transform.position = stController.right.transform.position;
+            ik.rightHandObj.transform.rotation = stController.right.transform.rotation;
+        }
+        if (stController.left != null)
+        {
+            ik.leftHandObj.transform.position = stController.left.transform.position;
+            ik.leftHandObj.transform.rotation = stController.left.transform.rotation;
+        }
+
+    }
     /// <summary>
     /// 入力更新
     /// </summary>

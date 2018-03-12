@@ -9,6 +9,8 @@ using Valve.VR;
 
 public class SteamVR_ControllerManager : MonoBehaviour
 {
+    public static SteamVR_ControllerManager instance;
+     
 	public GameObject left, right;
 
 	[Tooltip("Populate with objects you want to assign to additional controllers")]
@@ -56,7 +58,9 @@ public class SteamVR_ControllerManager : MonoBehaviour
 
 	void Awake()
 	{
-		UpdateTargets();
+        instance = this;
+
+        UpdateTargets();
 	}
 
 	SteamVR_ControllerManager()
