@@ -17,12 +17,13 @@ public class IKControl : MonoBehaviour {
 	public Transform bodyObj = null;
 
 	public Transform lookObj = null;
+    public Transform headObj = null; // lookObjの親要素
 
-	//public SimulateWalk simulateWalk;
-	//public Transform simulateRightObj = null;
-	//public Transform simulateLeftObj = null;
+    //public SimulateWalk simulateWalk;
+    //public Transform simulateRightObj = null;
+    //public Transform simulateLeftObj = null;
 
-	void Start () 
+    void Start () 
 	{
 		animator = GetComponent<Animator>();
 	}
