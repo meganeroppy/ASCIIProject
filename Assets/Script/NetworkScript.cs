@@ -5,6 +5,11 @@ using UnityEngine.Networking;
 
 public class NetworkScript : NetworkBehaviour
 {
+	/// <summary>
+	/// 自身へのインスタンス
+	/// </summary>
+	public static NetworkScript instance;
+
     /// <summary>
     /// アプリタイプ
     /// </summary>
@@ -21,6 +26,9 @@ public class NetworkScript : NetworkBehaviour
     private AppTypeEnum appType;
     public AppTypeEnum AppType { get { return appType; } }
 
+	[SerializeField]
+	private bool ignoreViveTracking;
+	public bool IgnoreViveTracking{ get{ return ignoreViveTracking; }}
     /// <summary>
     /// 実況者プレハブ
     /// </summary>
@@ -40,7 +48,10 @@ public class NetworkScript : NetworkBehaviour
 
     public GameObject dualTouchControls;
 
-	void Start () {
+	void Start () 
+	{
+		instance = this;
+
         dualTouchControls = GameObject.Find("DualTouchControls");
     }
 	

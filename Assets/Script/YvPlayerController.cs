@@ -40,7 +40,10 @@ public class YvPlayerController : NetworkBehaviour
     void Update()
     {
         UpdateInput();
-        UpdatePosition();
+		if ( NetworkScript.instance.IgnoreViveTracking )
+		{
+        	UpdatePosition();
+		}
         UpdateIkObjects();
     }
 
