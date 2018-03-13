@@ -26,9 +26,21 @@ public class NetworkScript : NetworkBehaviour
     private AppTypeEnum appType;
     public AppTypeEnum AppType { get { return appType; } }
 
+	/// <summary>
+	/// 実況者スクリプトでViveによる入力を無視するか？（＝キーボード入力を受け付けるか？）
+	/// 基本false Viveがないデバッグ時などは適宜true
+	/// </summary>
 	[SerializeField]
 	private bool ignoreViveTracking;
 	public bool IgnoreViveTracking{ get{ return ignoreViveTracking; }}
+
+	/// <summary>
+	/// 特定の実況者との距離がこの値以下になったらその実況者をフォーカス対象とする
+	/// </summary>
+	[SerializeField]
+	private float focusChangeThreshold = 1f;
+	public float FocusChangeThreshold{get{return focusChangeThreshold;}}
+
     /// <summary>
     /// 実況者プレハブ
     /// </summary>

@@ -500,7 +500,7 @@ GameObject:
   - component: {fileID: 114359801473919614}
   - component: {fileID: 95242582830959860}
   - component: {fileID: 114085214769020214}
-  - component: {fileID: 114992435648492022}
+  - component: {fileID: 114037344423530386}
   m_Layer: 0
   m_Name: PlayerTuber
   m_TagString: Untagged
@@ -6455,6 +6455,19 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114037344423530386
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1163955829757500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c65927d3922ed4fccb21efce0e15fdaa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ForceDisplaySelf: 1
+  modelRoot: {fileID: 1748504193156456}
 --- !u!114 &114085214769020214
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6584,19 +6597,6 @@ MonoBehaviour:
   m_MovementThreshold: 0.001
   m_InterpolateRotation: 0.5
   m_InterpolateMovement: 0.5
---- !u!114 &114992435648492022
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1163955829757500}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75483959f29cc6541854a54233315004, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ForceDisplaySelf: 1
-  modelRoot: {fileID: 1163955829757500}
 --- !u!137 &137006437879634238
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

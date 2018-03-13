@@ -3,8 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class YvPlayerController : NetworkBehaviour
+public class YvTuberController : NetworkBehaviour
 {
+	/// <summary>
+	/// 実況者のリスト
+	/// </summary>
+	public static List<YvTuberController> tuberList;
+
     /// <summary>
     /// 自分自身の時でも自身のモデルを表示する
     /// </summary>
@@ -18,6 +23,27 @@ public class YvPlayerController : NetworkBehaviour
 
     private SteamVR_ControllerManager stController;
     private SteamVR_Camera stCamera ;
+
+	/// <summary>
+	/// 受け取ったいいね！の数
+	/// </summary>
+	[SyncVar]
+	private int likeCount;
+	public int LikeCount{ get{  return likeCount;}}
+
+	/// <summary>
+	/// 受け取った微妙だね！の数
+	/// </summary>
+	[SyncVar]
+	private int disLikeCount;
+	public int DislikeCount{ get{  return disLikeCount;}}
+
+	void Start()
+	{
+		// リストに自身を追加
+		if( tuberList == null ) tuberList = new List<YvTuberController>();
+		tuberList.Add( this );
+	}
 
     public override void OnStartLocalPlayer()
     {
@@ -35,8 +61,16 @@ public class YvPlayerController : NetworkBehaviour
         YvGameManager.instance.ArCamera.SetActive(false);
     }
 
+	public override void OnStartServer ()
+	{
+		base.OnStartServer ();
 
+		// とりあえず現状は起動時にいいね/微妙だねかうんとを0にしてしまう
+		likeCount = 0;
+		disLikeCount = 0;
+	}
 
+	[ClientCallback]
     void Update()
     {
         UpdateInput();
@@ -50,6 +84,7 @@ public class YvPlayerController : NetworkBehaviour
     /// <summary>
     /// IKターゲットの更新
     /// </summary>
+	[Client]
     void UpdateIkObjects()
     {
         // 両手のコントローラと該当オブジェクトの位置と回転を同期
@@ -59,6 +94,7 @@ public class YvPlayerController : NetworkBehaviour
 
     }
 
+	[Client]
     void UpdatePosition()
     {
         // iKinema対応したら体と両足も対応する
@@ -99,6 +135,7 @@ public class YvPlayerController : NetworkBehaviour
     /// <summary>
     /// 入力更新
     /// </summary>
+	[Client]
     void UpdateInput()
     {
         if( Input.GetKey(KeyCode.I))
@@ -117,6 +154,24 @@ public class YvPlayerController : NetworkBehaviour
         {
             ik.rightHandObj.transform.Translate(-Vector3.up * Time.deltaTime);
         }
-
     }
+
+	/// <summary>
+	/// エモートを受け取る
+	/// </summary>
+	[Server]
+	public void ReceiveEmote( YvAudienceController.EmoteEnum emote, NetworkInstanceId netId )
+	{
+		if( emote == YvAudienceController.EmoteEnum.Like )
+		{
+			likeCount++;
+			Debug.Log( "NetId = " + netId.ToString() + " のプレイヤーから「いいね！」がとどいた" );
+		}
+		else
+		{
+			disLikeCount++;
+			Debug.Log( "NetId = " + netId.ToString() + " のプレイヤーから「微妙だね！」がとどいた" );
+		}
+	}
+
 }
