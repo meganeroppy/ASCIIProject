@@ -24,11 +24,21 @@ public class YvAudienceController : NetworkBehaviour
 	private float checkDistanceInterval = 1f;
 	private float timer = 0;
 
-	// Use this for initialization
-	void Start () 
+	/// <summary>
+	/// 自身のビジュアル
+	/// </summary>
+	[SerializeField]
+	private GameObject model;
+
+	public override void OnStartClient ()
 	{
-		
-	}
+		base.OnStartClient ();
+
+		// 自分の時は強制表示フラグがない限り自身のモデルを非表示
+		if( !NetworkScript.instance.ForceDisplaySelf )
+		{
+			model.SetActive(false);
+		}	}
 	
 	// Update is called once per frame
 	[ClientCallback]
