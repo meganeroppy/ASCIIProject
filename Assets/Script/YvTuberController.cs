@@ -32,6 +32,12 @@ public class YvTuberController : NetworkBehaviour
 	private int disLikeCount;
 	public int DislikeCount{ get{  return disLikeCount;}}
 
+	/// <summary>
+	/// ダミープレイヤーか？
+	/// </summary>
+	[SerializeField]
+	private bool isDummyPlayer = false;
+
 	void Start()
 	{
 		// リストに自身を追加
@@ -39,6 +45,7 @@ public class YvTuberController : NetworkBehaviour
 		tuberList.Add( this );
 	}
 
+	[Client]
     public override void OnStartLocalPlayer()
     {
         base.OnStartLocalPlayer();
@@ -91,6 +98,8 @@ public class YvTuberController : NetworkBehaviour
 	[Client]
     void UpdatePosition()
     {
+		if( !isLocalPlayer ) return;
+
         // iKinema対応したら体と両足も対応する
 
         if ( stCamera == null )
@@ -132,6 +141,8 @@ public class YvTuberController : NetworkBehaviour
 	[Client]
     void UpdateInput()
     {
+		if( !isLocalPlayer ) return;
+
         if( Input.GetKey(KeyCode.I))
         {
             ik.leftHandObj.transform.Translate(Vector3.up * Time.deltaTime);
