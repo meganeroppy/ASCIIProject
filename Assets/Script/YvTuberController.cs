@@ -10,12 +10,6 @@ public class YvTuberController : NetworkBehaviour
 	/// </summary>
 	public static List<YvTuberController> tuberList;
 
-    /// <summary>
-    /// 自分自身の時でも自身のモデルを表示する
-    /// </summary>
-    [SerializeField]
-    private bool ForceDisplaySelf;
-
     [SerializeField]
     private GameObject modelRoot;
 
@@ -50,7 +44,7 @@ public class YvTuberController : NetworkBehaviour
         base.OnStartLocalPlayer();
 
         // 自分の時は強制表示フラグがない限り自身のモデルを非表示
-        if( !ForceDisplaySelf )
+		if( !NetworkScript.instance.ForceDisplaySelf )
         {
             modelRoot.SetActive(false);
         }

@@ -41,6 +41,7 @@ public class NetworkScript : NetworkBehaviour
 	private float focusChangeThreshold = 1f;
 	public float FocusChangeThreshold{get{return focusChangeThreshold;}}
 
+
     /// <summary>
     /// 実況者プレハブ
     /// </summary>
@@ -52,6 +53,13 @@ public class NetworkScript : NetworkBehaviour
     /// </summary>
     [SerializeField]
     private GameObject playerPrefabAudience;
+
+	/// <summary>
+	/// 自分自身の時でも自身のモデルを表示するか？
+	/// </summary>
+	[SerializeField]
+	private bool forceDisplaySelf;
+	public bool ForceDisplaySelf{get{ return forceDisplaySelf; }} 
 
     [SerializeField]
 
