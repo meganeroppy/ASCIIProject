@@ -66,13 +66,13 @@ public class NetworkScript : NetworkBehaviour
 
     public Canvas canvas;
 
-    public GameObject dualTouchControls;
+    //public GameObject dualTouchControls;
 
 	void Start () 
 	{
 		instance = this;
 
-        dualTouchControls = GameObject.Find("DualTouchControls");
+    //    dualTouchControls = GameObject.Find("DualTouchControls");
     }
 	
 	void Update () {}
@@ -84,7 +84,7 @@ public class NetworkScript : NetworkBehaviour
 
         canvas.gameObject.SetActive(false);
         NetworkManager.singleton.StartHost();
-        dualTouchControls.SetActive(true);
+    //    dualTouchControls.SetActive(true);
     }
 
     public void OnClientButton()
@@ -94,7 +94,7 @@ public class NetworkScript : NetworkBehaviour
 
         canvas.gameObject.SetActive(false);
         NetworkClient client = NetworkManager.singleton.StartClient();
-        dualTouchControls.SetActive(true);
+    //    dualTouchControls.SetActive(true);
         Debug.Log(client.serverIp);
         Debug.Log(client.serverPort);
         Debug.Log(client.GetType());
@@ -104,7 +104,7 @@ public class NetworkScript : NetworkBehaviour
     {
         canvas.gameObject.SetActive(false);
         NetworkManager.singleton.StartServer();
-        dualTouchControls.SetActive(true);
+    //    dualTouchControls.SetActive(true);
     }
 
 }

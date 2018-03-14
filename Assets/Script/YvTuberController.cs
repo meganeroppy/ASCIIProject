@@ -170,12 +170,12 @@ public class YvTuberController : NetworkBehaviour
 		if( emote == YvAudienceController.EmoteEnum.Like )
 		{
 			likeCount++;
-			Debug.Log( "NetId = " + netId.ToString() + " のプレイヤーから「いいね！」がとどいた" );
+			Debug.Log( "NetId = " + netId.ToString() + " の来場者から NetId = " + this.netId.ToString() + "の実況者に「いいね！」がとどいた" );
 		}
 		else
 		{
 			disLikeCount++;
-			Debug.Log( "NetId = " + netId.ToString() + " のプレイヤーから「微妙だね！」がとどいた" );
+			Debug.Log( "NetId = " + netId.ToString() + " の来場者から NetId = " + this.netId.ToString() + "の実況者に「微妙だね！」がとどいた" );
 		}
 	}
 

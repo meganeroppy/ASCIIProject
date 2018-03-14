@@ -69,7 +69,6 @@ public class YvAudienceController : NetworkBehaviour
 		// 実況者がいなければなにもしない
 		if( YvTuberController.tuberList == null )
 		{
-			Debug.LogWarning("実況者なし");
 			return;
 		}
 
@@ -96,12 +95,14 @@ public class YvAudienceController : NetworkBehaviour
 	/// <summary>
 	/// エモート送信ボタンを押した時のイベント
 	/// </summary>
-	[Client]
-	public void OnClickEmoteButton( EmoteEnum emote )
+	public void OnClickEmoteButton( int emoteIdx )
 	{
 		// フォーカス風チャンネルがなければなにもしない
-		if( string.IsNullOrEmpty( currentFocusCannel) ) return;
-
+		if( string.IsNullOrEmpty( currentFocusCannel) )
+		{
+			Debug.LogWarning("フォーカス中のチャンネルなし");
+			return;
+		}
 		// 対象の実況者を取得
 		var target = YvTuberController.tuberList.Find( o => o.netId.ToString() == currentFocusCannel );
 		if( target == null )
@@ -110,7 +111,9 @@ public class YvAudienceController : NetworkBehaviour
 			return;
 		}
 
-		CmdSendEmote( emote, target.netId );
+		Debug.Log( emoteIdx == 0 ? "いいね！" : "微妙だね！");
+
+		CmdSendEmote( (EmoteEnum)emoteIdx, target.netId );
 	}
 
 	/// <summary>
@@ -121,12 +124,36 @@ public class YvAudienceController : NetworkBehaviour
 	{
 		if( Input.GetKeyDown( KeyCode.L ) )
 		{
-			OnClickEmoteButton( EmoteEnum.Like );
+			OnClickEmoteButton( 0 );
 		}
 
 		if( Input.GetKeyDown( KeyCode.D ) )
 		{
-			OnClickEmoteButton( EmoteEnum.DisLike );
+			OnClickEmoteButton( 1 );
+		}
+
+		var v = Input.GetAxis("Vertical");
+
+		if( Mathf.Abs(v) > 0 )
+		{
+			transform.Translate( transform.forward * ( v > 0 ? 1f : -1f ) * Time.deltaTime );
+		}
+
+		var h = Input.GetAxis("Horizontal");
+
+		if( Mathf.Abs(h) > 0 )
+		{
+			transform.Translate( transform.right * ( h > 0 ? 1f : -1f ) * Time.deltaTime );
+		}
+
+		if( Input .GetKey( KeyCode.I ) )
+		{
+			transform.Rotate( Vector3.up * -1f * Time.deltaTime );
+		}
+
+		if( Input .GetKey( KeyCode.O ) )
+		{
+			transform.Rotate( Vector3.up * 1f * Time.deltaTime );
 		}
 
 	}
