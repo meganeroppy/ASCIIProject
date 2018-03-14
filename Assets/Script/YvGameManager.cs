@@ -9,9 +9,19 @@ public class YvGameManager : MonoBehaviour
 {
     public static YvGameManager instance;
 
+	/// <summary>
+	/// 来場者プレハブのカメラがちゃんと動いていることが確認できたら削除
+	/// </summary>
     [SerializeField]
     private GameObject arCamera;
     public GameObject ArCamera { get { return arCamera; } }
+
+	/// <summary>
+	/// 来場者プレイヤーの初期生成位置
+	/// </summary>
+	[SerializeField]
+	private Transform audienceOrigin;
+	public Transform AudienceOrigin{ get {return audienceOrigin;}}
 
 	// Use this for initialization
 	void Awake ()

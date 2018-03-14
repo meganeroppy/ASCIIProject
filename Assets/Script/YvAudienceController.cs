@@ -38,7 +38,12 @@ public class YvAudienceController : NetworkBehaviour
 		if( !NetworkScript.instance.ForceDisplaySelf )
 		{
 			model.SetActive(false);
-		}	}
+		}
+
+		// 初期位置と回転を指定する
+		transform.position = YvGameManager.instance.AudienceOrigin.transform.position;
+		transform.rotation = YvGameManager.instance.AudienceOrigin.transform.rotation;
+	}
 	
 	// Update is called once per frame
 	[ClientCallback]
@@ -60,6 +65,13 @@ public class YvAudienceController : NetworkBehaviour
 		if(  timer < checkDistanceInterval ) return;
 			
 		timer = 0;
+
+		// 実況者がいなければなにもしない
+		if( YvTuberController.tuberList == null )
+		{
+			Debug.LogWarning("実況者なし");
+			return;
+		}
 
 		// 閾値取得
 		var threshold = NetworkScript.instance.FocusChangeThreshold;
