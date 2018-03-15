@@ -89,7 +89,16 @@ public class YvAudienceController : NetworkBehaviour
 		inRange.Sort( (a,b) =>  (int)Vector3.Distance( a.transform.position, transform.position ) - (int)Vector3.Distance( b.transform.position, transform.position ) );
 		var nearest = inRange[0];
 
-		currentFocusCannel = nearest.netId.ToString();
+        var newChannel = nearest.netId.ToString();
+
+        if (currentFocusCannel != newChannel)
+        {
+            // チャンネル切り替え時に演出などするならここで
+
+            Debug.Log("フォーカス中チャンネル変更 -> " + newChannel);
+        }
+
+		currentFocusCannel = newChannel;
 	}
 
 	/// <summary>
