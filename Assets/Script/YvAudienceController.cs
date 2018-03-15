@@ -136,7 +136,7 @@ public class YvAudienceController : NetworkBehaviour
 			OnClickEmoteButton( 0 );
 		}
 
-		if( Input.GetKeyDown( KeyCode.D ) )
+		if( Input.GetKeyDown( KeyCode.K ) )
 		{
 			OnClickEmoteButton( 1 );
 		}
