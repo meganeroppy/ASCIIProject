@@ -30,6 +30,12 @@ public class YvAudienceController : NetworkBehaviour
 	[SerializeField]
 	private GameObject model;
 
+    [SerializeField]
+    private float tempMoveSpeed = 1.5f;
+
+    [SerializeField]
+    private float tempRotSpeed = 5f;
+
 	public override void OnStartClient ()
 	{
 		base.OnStartClient ();
@@ -145,24 +151,24 @@ public class YvAudienceController : NetworkBehaviour
 
 		if( Mathf.Abs(v) > 0 )
 		{
-			transform.Translate( transform.forward * ( v > 0 ? 1f : -1f ) * Time.deltaTime );
+			transform.Translate( transform.forward * ( v > 0 ? -1f : 1f ) * tempMoveSpeed * Time.deltaTime );
 		}
 
 		var h = Input.GetAxis("Horizontal");
 
 		if( Mathf.Abs(h) > 0 )
 		{
-			transform.Translate( transform.right * ( h > 0 ? 1f : -1f ) * Time.deltaTime );
+			transform.Translate( transform.right * ( h > 0 ? -1f : 1f ) * tempMoveSpeed * Time.deltaTime );
 		}
 
 		if( Input .GetKey( KeyCode.I ) )
 		{
-			transform.Rotate( Vector3.up * -1f * Time.deltaTime );
+			transform.Rotate( Vector3.up * -tempRotSpeed * Time.deltaTime );
 		}
 
 		if( Input .GetKey( KeyCode.O ) )
 		{
-			transform.Rotate( Vector3.up * 1f * Time.deltaTime );
+			transform.Rotate( Vector3.up * tempRotSpeed * Time.deltaTime );
 		}
 
 	}
