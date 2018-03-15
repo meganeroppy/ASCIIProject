@@ -80,12 +80,15 @@ public class YvAudienceController : NetworkBehaviour
 		transform.rotation = YvGameManager.instance.AudienceOrigin.transform.rotation;
 	}
 	
-	// Update is called once per frame
+    /// <summary>
+    /// クライアント専用Update()
+    /// </summary>
 	[ClientCallback]
 	void Update () 
 	{
 		UpdateFocusChannel();
 		UpdateTempInput();
+
 	}
 
 	/// <summary>
