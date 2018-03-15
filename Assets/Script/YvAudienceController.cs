@@ -36,6 +36,30 @@ public class YvAudienceController : NetworkBehaviour
     [SerializeField]
     private float tempRotSpeed = 5f;
 
+    /// <summary>
+    /// 自分自身の時のみ有効なオブジェクト
+    /// </summary>
+    [SerializeField]
+    private GameObject[] localOnlyObjects;
+
+    /// <summary>
+    /// いいね！ボタン＆微妙だね！ボタン
+    /// </summary>
+    [SerializeField]
+    private GameObject[] emoteButtons; 
+
+    void Awake()
+    {
+        // 自身でないときはオブジェクト無効
+        if (!isLocalPlayer)
+        {
+            foreach (GameObject g in localOnlyObjects)
+            {
+                g.SetActive(false);
+            }
+        }
+    }
+
 	public override void OnStartClient ()
 	{
 		base.OnStartClient ();
