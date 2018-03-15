@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class NetworkScript : NetworkBehaviour
+public class NetworkScript : NetworkManager
 {
 	/// <summary>
 	/// 自身へのインスタンス
@@ -62,8 +62,6 @@ public class NetworkScript : NetworkBehaviour
 	public bool ForceDisplaySelf{get{ return forceDisplaySelf; }} 
 
     [SerializeField]
-
-
     public Canvas canvas;
 
     //public GameObject dualTouchControls;
