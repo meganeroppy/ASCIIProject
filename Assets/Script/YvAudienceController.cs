@@ -55,7 +55,7 @@ public class YvAudienceController : NetworkBehaviour
 	[ClientCallback]
 	void Update () 
 	{
-		UpdateFocusCannel();
+		UpdateFocusChannel();
 		UpdateTempInput();
 	}
 
@@ -63,9 +63,8 @@ public class YvAudienceController : NetworkBehaviour
 	/// ターゲットとの距離に応じてフォーカス対象を変更する
 	/// </summary>
 	[Client]
-	void UpdateFocusCannel()
+	void UpdateFocusChannel()
 	{
-
 		// 毎フレーム処理すると負荷が高いので毎秒
 		timer ++;
 		if(  timer < checkDistanceInterval ) return;
