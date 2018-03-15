@@ -14,12 +14,12 @@ public class YvAudienceController : NetworkBehaviour
 		DisLike // 微妙だね！
 	}
 
-	/// <summary>
-	/// 現在フォーカスしているチャンネル
-	/// エモート送信動作を行うとこのチャンネルの実況者プレイヤーに対して送信される
-	/// とりあえずインスタンスIDを使う
-	/// </summary>
-	private string currentFocusCannel = "";
+    /// <summary>
+    /// 現在フォーカスしているチャンネル
+    /// エモート送信動作を行うとこのチャンネルの実況者プレイヤーに対して送信される
+    /// とりあえずインスタンスIDを使う
+    /// </summary>
+    private string currentFocusChannel = "";
 
 	private float checkDistanceInterval = 1f;
 	private float timer = 0;
@@ -110,7 +110,7 @@ public class YvAudienceController : NetworkBehaviour
 		// リストが空ならフォーカス中なし
 		if( inRange.Count <= 0 )
 		{
-			currentFocusCannel = "";
+			currentFocusChannel = "";
 			return;
 		}
 
@@ -120,14 +120,14 @@ public class YvAudienceController : NetworkBehaviour
 
         var newChannel = nearest.netId.ToString();
 
-        if (currentFocusCannel != newChannel)
+        if (currentFocusChannel != newChannel)
         {
             // チャンネル切り替え時に演出などするならここで
 
             Debug.Log("フォーカス中チャンネル変更 -> " + newChannel);
         }
 
-		currentFocusCannel = newChannel;
+		currentFocusChannel = newChannel;
 	}
 
 	/// <summary>
@@ -136,16 +136,16 @@ public class YvAudienceController : NetworkBehaviour
 	public void OnClickEmoteButton( int emoteIdx )
 	{
 		// フォーカス風チャンネルがなければなにもしない
-		if( string.IsNullOrEmpty( currentFocusCannel) )
+		if( string.IsNullOrEmpty( currentFocusChannel) )
 		{
 			Debug.LogWarning("フォーカス中のチャンネルなし");
 			return;
 		}
 		// 対象の実況者を取得
-		var target = YvTuberController.tuberList.Find( o => o.netId.ToString() == currentFocusCannel );
+		var target = YvTuberController.tuberList.Find( o => o.netId.ToString() == currentFocusChannel );
 		if( target == null )
 		{
-			Debug.LogError(" チャンネル(NetId) =  " + currentFocusCannel + " に該当する実況者が見つからない");
+			Debug.LogError(" チャンネル(NetId) =  " + currentFocusChannel + " に該当する実況者が見つからない");
 			return;
 		}
 
