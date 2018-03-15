@@ -21,7 +21,12 @@ public class YvAudienceController : NetworkBehaviour
     /// </summary>
     private string currentFocusChannel = "";
 
-	private float checkDistanceInterval = 1f;
+    /// <summary>
+    /// 前フレームのフォーカス中チャンネル
+    /// </summary>
+    private string prevFocusCannel = "";
+
+    private float checkDistanceInterval = 1f;
 	private float timer = 0;
 
 	/// <summary>
