@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 
 public class NetworkScript : NetworkManager
 {
@@ -64,6 +65,9 @@ public class NetworkScript : NetworkManager
     [SerializeField]
     public Canvas canvas;
 
+    [SerializeField]
+    private InputField inputField;
+
     //public GameObject dualTouchControls;
 
 	void Start () 
@@ -89,6 +93,12 @@ public class NetworkScript : NetworkManager
     {
         // 自分のアプリタイプによってプレハブを変える
         NetworkManager.singleton.playerPrefab = appType == AppTypeEnum.Tuber ? playerPrefabTuber : playerPrefabAudience;
+
+        // テキストフィールドに値が入力されていたらそれを接続先アドレスにする
+        if (string.IsNullOrEmpty(inputField.text))
+        {
+            networkAddress = inputField.text;
+        }
 
         canvas.gameObject.SetActive(false);
         var client = StartClient();
