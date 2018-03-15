@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 
 /// <summary>
 /// 来場者のスクリプト
@@ -51,11 +52,13 @@ public class YvAudienceController : NetworkBehaviour
     /// いいね！ボタン＆微妙だね！ボタン
     /// </summary>
     [SerializeField]
-    private GameObject[] emoteButtons; 
+    private Button[] emoteButtons; 
 
     void Awake()
     {
-        // 自身でないときはオブジェクト無効
+        Debug.Log("Awake");
+
+        // 自身専用オブジェクトをいったんすべて無効
         if (!isLocalPlayer)
         {
             foreach (GameObject g in localOnlyObjects)
@@ -67,6 +70,8 @@ public class YvAudienceController : NetworkBehaviour
 
 	public override void OnStartClient ()
 	{
+        Debug.Log("OnStartClient");
+
 		base.OnStartClient ();
 
 		// 自分の時は強制表示フラグがない限り自身のモデルを非表示
@@ -78,18 +83,42 @@ public class YvAudienceController : NetworkBehaviour
 		// 初期位置と回転を指定する
 		transform.position = YvGameManager.instance.AudienceOrigin.transform.position;
 		transform.rotation = YvGameManager.instance.AudienceOrigin.transform.rotation;
-	}
-	
+
+        // 自身専用オブジェクトを有効
+        if (!isLocalPlayer)
+        {
+            foreach (GameObject g in localOnlyObjects)
+            {
+                g.SetActive(true);
+            }
+        }
+
+        // 最初はエモート送信ボタン無効
+        foreach (Button b in emoteButtons)
+        {
+            b.interactable = false;
+        }
+    }
+
     /// <summary>
-    /// クライアント専用Update()
+    /// クライアント専用
     /// </summary>
-	[ClientCallback]
+    [ClientCallback]
 	void Update () 
 	{
 		UpdateFocusChannel();
 		UpdateTempInput();
-
+        UpdateUI();
 	}
+
+    /// <summary>
+    /// クライアント専用
+    /// </summary>
+    [ClientCallback]
+    void LateUpdate()
+    {
+        prevFocusCannel = currentFocusChannel;
+    }
 
 	/// <summary>
 	/// ターゲットとの距離に応じてフォーカス対象を変更する
@@ -203,6 +232,21 @@ public class YvAudienceController : NetworkBehaviour
 		}
 
 	}
+
+    /// <summary>
+    /// UI表示物更新
+    /// </summary>
+    [Client]
+    private void UpdateUI()
+    {
+        if( currentFocusChannel != prevFocusCannel )
+        {
+            foreach( Button b in emoteButtons)
+            {
+                b.interactable = !string.IsNullOrEmpty(currentFocusChannel);
+            }
+        }
+    }
 
 	/// <summary>
 	/// エモートの送信をサーバー側で行う

@@ -629,6 +629,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   model: {fileID: 1913251715152202}
+  tempMoveSpeed: 1.5
+  tempRotSpeed: 5
+  localOnlyObjects:
+  - {fileID: 1295694946185560}
+  - {fileID: 1412765989757378}
+  emoteButtons:
+  - {fileID: 114455610921379202}
+  - {fileID: 114702308364566006}
 --- !u!222 &222104893890970864
 CanvasRenderer:
   m_ObjectHideFlags: 1
