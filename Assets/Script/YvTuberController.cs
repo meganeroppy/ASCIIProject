@@ -75,7 +75,7 @@ public class YvTuberController : NetworkBehaviour
     void Update()
     {
         UpdateInput();
-		if ( NetworkScript.instance.IgnoreViveTracking )
+		if ( !NetworkScript.instance.IgnoreViveTracking )
 		{
         	UpdatePosition();
 		}
