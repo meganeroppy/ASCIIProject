@@ -81,7 +81,7 @@ public class NetworkScript : NetworkManager
         NetworkManager.singleton.playerPrefab = appType == AppTypeEnum.Tuber ? playerPrefabTuber : playerPrefabAudience;
 
         canvas.gameObject.SetActive(false);
-        NetworkManager.singleton.StartHost();
+        StartHost();
     //    dualTouchControls.SetActive(true);
     }
 
@@ -91,7 +91,7 @@ public class NetworkScript : NetworkManager
         NetworkManager.singleton.playerPrefab = appType == AppTypeEnum.Tuber ? playerPrefabTuber : playerPrefabAudience;
 
         canvas.gameObject.SetActive(false);
-        NetworkClient client = NetworkManager.singleton.StartClient();
+        var client = StartClient();
     //    dualTouchControls.SetActive(true);
         Debug.Log(client.serverIp);
         Debug.Log(client.serverPort);
@@ -101,7 +101,7 @@ public class NetworkScript : NetworkManager
     public void OnServerButton()
     {
         canvas.gameObject.SetActive(false);
-        NetworkManager.singleton.StartServer();
+        StartServer();
     //    dualTouchControls.SetActive(true);
     }
 
