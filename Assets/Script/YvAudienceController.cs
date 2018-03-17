@@ -79,18 +79,26 @@ public class YvAudienceController : NetworkBehaviour
         foreach (Button b in emoteButtons)
         {
             b.interactable = false;
+			b.gameObject.SetActive( false );
         }
     }
 
 	void Start()
 	{
 		Debug.Log("Start");
+
 		// 自身専用オブジェクトを有効
 		if (isLocalPlayer)
 		{
 			foreach (GameObject g in localOnlyObjects)
 			{
 				g.SetActive(true);
+			}
+
+			// エモート送信ボタンも表示
+			foreach (Button b in emoteButtons)
+			{
+				b.gameObject.SetActive( true );
 			}
 		}
 
@@ -107,6 +115,9 @@ public class YvAudienceController : NetworkBehaviour
     [ClientCallback]
 	void Update () 
 	{
+		// 自身でなければなにもしない
+		if( !isLocalPlayer ) return;
+
 		UpdateFocusChannel();
 		UpdateTempInput();
         UpdateUI();
