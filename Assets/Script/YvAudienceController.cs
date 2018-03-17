@@ -71,12 +71,6 @@ public class YvAudienceController : NetworkBehaviour
 
 		base.OnStartClient ();
 
-		// 自分の時は強制表示フラグがない限り自身のモデルを非表示
-		if( !NetworkScript.instance.ForceDisplaySelf )
-		{
-			model.SetActive(false);
-		}
-
 		// 初期位置と回転を指定する
 		transform.position = YvGameManager.instance.AudienceOrigin.transform.position;
 		transform.rotation = YvGameManager.instance.AudienceOrigin.transform.rotation;
@@ -99,7 +93,13 @@ public class YvAudienceController : NetworkBehaviour
 				g.SetActive(true);
 			}
 		}
-	}
+
+        // 自分の時は強制表示フラグがない限り自身のモデルを非表示
+        if (isLocalPlayer && !NetworkScript.instance.ForceDisplaySelf)
+        {
+            model.SetActive(false);
+        }
+    }
 
     /// <summary>
     /// クライアント専用
