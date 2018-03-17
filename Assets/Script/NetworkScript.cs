@@ -101,7 +101,7 @@ public class NetworkScript : NetworkManager
     //    NetworkManager.singleton.playerPrefab = appType == AppTypeEnum.Tuber ? playerPrefabTuber : playerPrefabAudience;
 
         // テキストフィールドに値が入力されていたらそれを接続先アドレスにする
-        if (string.IsNullOrEmpty(inputField.text))
+        if (!string.IsNullOrEmpty(inputField.text))
         {
             networkAddress = inputField.text;
         }
