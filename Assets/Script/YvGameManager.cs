@@ -18,6 +18,13 @@ public class YvGameManager : NetworkBehaviour
     public GameObject ArCamera { get { return arCamera; } }
 
 	/// <summary>
+	/// VR用カメラリグ
+	/// 自身が実況者でなければ無効にする
+	/// </summary>
+	[SerializeField]
+	private GameObject cameraRig;
+
+	/// <summary>
 	/// 来場者プレイヤーの初期生成位置
 	/// </summary>
 	[SerializeField]
@@ -43,25 +50,33 @@ public class YvGameManager : NetworkBehaviour
         instance = this;
 	}
 
-	[ServerCallback]
 	void Start()
 	{
-		// ダミーを生成する
-		for( int i=0 ; i < tuberDummyPrefabs.Length ; ++i )
+		if( isServer )
 		{
-			var obj = Instantiate( tuberDummyPrefabs[i] );
-			if( tuberDummyRoots.Length <= i )
+			// ダミーを生成する
+			for( int i=0 ; i < tuberDummyPrefabs.Length ; ++i )
 			{
-				Debug.LogError( "実況者ダミーインデックス[ " + i.ToString() + " ]に対応するルートがない");
-				continue;
+				var obj = Instantiate( tuberDummyPrefabs[i] );
+				if( tuberDummyRoots.Length <= i )
+				{
+					Debug.LogError( "実況者ダミーインデックス[ " + i.ToString() + " ]に対応するルートがない");
+					continue;
+				}
+
+				var root = tuberDummyRoots[i];
+
+				obj.transform.SetParent( root, false );
+
+				// サーバー上に生成
+				NetworkServer.Spawn( obj );
 			}
+		}
 
-			var root = tuberDummyRoots[i];
-
-			obj.transform.SetParent( root, false );
-
-			// サーバー上に生成
-			NetworkServer.Spawn( obj );
+		// 自分が実況者でなければカメラリグ無効
+		if( NetworkScript.instance.AppType != NetworkScript.AppTypeEnum.Tuber )
+		{
+			cameraRig.SetActive( false );
 		}
 	}
 	
