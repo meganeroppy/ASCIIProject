@@ -55,10 +55,10 @@ public class NetworkScript : NetworkManager
     [SerializeField]
     private GameObject playerPrefabAudience;
 
-	/// <summary>
-	/// 自分自身の時でも自身のモデルを表示するか？
-	/// </summary>
-	[SerializeField]
+    /// <summary>
+    /// 自分自身の時でも自身のモデルを表示するか？
+    /// </summary>
+    [SerializeField]
 	private bool forceDisplaySelf;
 	public bool ForceDisplaySelf{get{ return forceDisplaySelf; }} 
 
@@ -74,7 +74,13 @@ public class NetworkScript : NetworkManager
 	{
 		instance = this;
 
-    //    dualTouchControls = GameObject.Find("DualTouchControls");
+        //    dualTouchControls = GameObject.Find("DualTouchControls");
+
+// 役割に応じてXRセッティングを変更
+#if UNITY_EDITOR
+        UnityEditor.PlayerSettings.virtualRealitySupported = AppType == AppTypeEnum.Tuber;
+        UnityEditor.PlayerSettings.SetVirtualRealitySupported(UnityEditor.BuildTargetGroup.Android, AppType == AppTypeEnum.Audience);
+#endif 
     }
 	
 	void Update () {}
@@ -82,7 +88,7 @@ public class NetworkScript : NetworkManager
     public void OnHostButton()
     {
         // 自分のアプリタイプによってプレハブを変える
-        NetworkManager.singleton.playerPrefab = appType == AppTypeEnum.Tuber ? playerPrefabTuber : playerPrefabAudience;
+    //    NetworkManager.singleton.playerPrefab = appType == AppTypeEnum.Tuber ? playerPrefabTuber : playerPrefabAudience;
 
         canvas.gameObject.SetActive(false);
         StartHost();
@@ -92,7 +98,7 @@ public class NetworkScript : NetworkManager
     public void OnClientButton()
     {
         // 自分のアプリタイプによってプレハブを変える
-        NetworkManager.singleton.playerPrefab = appType == AppTypeEnum.Tuber ? playerPrefabTuber : playerPrefabAudience;
+    //    NetworkManager.singleton.playerPrefab = appType == AppTypeEnum.Tuber ? playerPrefabTuber : playerPrefabAudience;
 
         // テキストフィールドに値が入力されていたらそれを接続先アドレスにする
         if (string.IsNullOrEmpty(inputField.text))
@@ -115,4 +121,53 @@ public class NetworkScript : NetworkManager
     //    dualTouchControls.SetActive(true);
     }
 
+    /// <summary>
+    /// 生成プレハブを変えるためにオーバーライド
+    /// </summary>
+    /// <param name="conn"></param>
+    /// <param name="playerControllerId"></param>
+    public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId, NetworkReader extraMessageReader) // ←第3引数があるバージョンに変更します
+    {
+        PlayerInfoMessage msg = extraMessageReader.ReadMessage<PlayerInfoMessage>();
+        var appType = msg.appType;
+
+        GameObject playerPrefab;
+
+        if (appType == AppTypeEnum.Tuber) playerPrefab = playerPrefabTuber;
+        else playerPrefab = playerPrefabAudience;
+
+        GameObject player;
+        Transform startPos = GetStartPosition();
+        if (startPos != null)
+        {
+            player = (GameObject)Instantiate(playerPrefab, startPos.position, startPos.rotation);
+        }
+        else
+        {
+            player = (GameObject)Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
+        }
+
+        NetworkServer.AddPlayerForConnection(conn, player, playerControllerId);
+    }
+
+    public override void OnClientConnect(NetworkConnection conn)
+    {
+        Debug.Log(System.Reflection.MethodBase.GetCurrentMethod());
+        // クライアント上でシーンの準備が完了したらこれを呼ぶ必要がある
+        ClientScene.Ready(conn);
+
+        // PlayerInfoMessageオブジェクトを作成し、プレイヤーの情報を格納する
+        PlayerInfoMessage msg = new PlayerInfoMessage();
+        msg.appType = AppType;
+
+        // サーバーにAddPlayerメッセージを送信する。
+        // その際、第3引数に追加情報（PlayerInfoMessage）を付与する。
+        ClientScene.AddPlayer(conn, 0, msg);
+    }
+
+    // プレイヤー生成時に必要な情報をクライアントからサーバーへ送るための入れ物
+    class PlayerInfoMessage : MessageBase
+    {
+        public AppTypeEnum appType;
+    }
 }
