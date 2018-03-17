@@ -75,12 +75,6 @@ public class NetworkScript : NetworkManager
 		instance = this;
 
         //    dualTouchControls = GameObject.Find("DualTouchControls");
-
-// 役割に応じてXRセッティングを変更
-#if UNITY_EDITOR
-        UnityEditor.PlayerSettings.virtualRealitySupported = AppType == AppTypeEnum.Tuber;
-        UnityEditor.PlayerSettings.SetVirtualRealitySupported(UnityEditor.BuildTargetGroup.Android, AppType == AppTypeEnum.Audience);
-#endif 
     }
 	
 	void Update () {}
