@@ -70,11 +70,20 @@ public class NetworkScript : NetworkManager
 
     //public GameObject dualTouchControls;
 
+	[SerializeField]
+	private bool disableAutoConnectAsAudienceClient = false;
+
 	void Start () 
 	{
 		instance = this;
 
         //    dualTouchControls = GameObject.Find("DualTouchControls");
+
+		// 来場者アプリは即クライアントとして接続
+		if( AppType == AppTypeEnum.Audience && !disableAutoConnectAsAudienceClient )
+		{
+			ConnectClient();
+		}
     }
 	
 	void Update () {}
@@ -91,22 +100,27 @@ public class NetworkScript : NetworkManager
 
     public void OnClientButton()
     {
-        // 自分のアプリタイプによってプレハブを変える
-    //    NetworkManager.singleton.playerPrefab = appType == AppTypeEnum.Tuber ? playerPrefabTuber : playerPrefabAudience;
-
-        // テキストフィールドに値が入力されていたらそれを接続先アドレスにする
-        if (!string.IsNullOrEmpty(inputField.text))
-        {
-            networkAddress = inputField.text;
-        }
-
-        canvas.gameObject.SetActive(false);
-        var client = StartClient();
-    //    dualTouchControls.SetActive(true);
-        Debug.Log(client.serverIp);
-        Debug.Log(client.serverPort);
-        Debug.Log(client.GetType());
+		ConnectClient();
     } 
+
+	private void ConnectClient()
+	{
+		// 自分のアプリタイプによってプレハブを変える
+		//    NetworkManager.singleton.playerPrefab = appType == AppTypeEnum.Tuber ? playerPrefabTuber : playerPrefabAudience;
+
+		// テキストフィールドに値が入力されていたらそれを接続先アドレスにする
+		if (!string.IsNullOrEmpty(inputField.text))
+		{
+			networkAddress = inputField.text;
+		}
+
+		canvas.gameObject.SetActive(false);
+		var client = StartClient();
+		//    dualTouchControls.SetActive(true);
+		Debug.Log(client.serverIp);
+		Debug.Log(client.serverPort);
+		Debug.Log(client.GetType());	
+	}
 
     public void OnServerButton()
     {
