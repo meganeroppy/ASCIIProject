@@ -85,7 +85,7 @@ public class YvAudienceController : NetworkBehaviour
 		transform.rotation = YvGameManager.instance.AudienceOrigin.transform.rotation;
 
         // 自身専用オブジェクトを有効
-        if (!isLocalPlayer)
+        if (isLocalPlayer)
         {
             foreach (GameObject g in localOnlyObjects)
             {
