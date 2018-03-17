@@ -59,13 +59,10 @@ public class YvAudienceController : NetworkBehaviour
         Debug.Log("Awake");
 
         // 自身専用オブジェクトをいったんすべて無効
-        if (!isLocalPlayer)
-        {
-            foreach (GameObject g in localOnlyObjects)
-            {
-                g.SetActive(false);
-            }
-        }
+		foreach (GameObject g in localOnlyObjects)
+		{
+			g.SetActive(false);
+		}
     }
 
 	public override void OnStartClient ()
@@ -84,21 +81,25 @@ public class YvAudienceController : NetworkBehaviour
 		transform.position = YvGameManager.instance.AudienceOrigin.transform.position;
 		transform.rotation = YvGameManager.instance.AudienceOrigin.transform.rotation;
 
-        // 自身専用オブジェクトを有効
-        if (isLocalPlayer)
-        {
-            foreach (GameObject g in localOnlyObjects)
-            {
-                g.SetActive(true);
-            }
-        }
-
         // 最初はエモート送信ボタン無効
         foreach (Button b in emoteButtons)
         {
             b.interactable = false;
         }
     }
+
+	void Start()
+	{
+		Debug.Log("Start");
+		// 自身専用オブジェクトを有効
+		if (isLocalPlayer)
+		{
+			foreach (GameObject g in localOnlyObjects)
+			{
+				g.SetActive(true);
+			}
+		}
+	}
 
     /// <summary>
     /// クライアント専用
