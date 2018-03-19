@@ -121,6 +121,7 @@ public class YvAudienceController : NetworkBehaviour
 		UpdateFocusChannel();
 		UpdateTempInput();
         UpdateUI();
+
 	}
 
     /// <summary>

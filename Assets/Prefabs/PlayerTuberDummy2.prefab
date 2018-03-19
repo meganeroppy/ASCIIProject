@@ -2460,6 +2460,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   modelRoot: {fileID: 1181067531438748}
+  baseIndex: 2
   isDummyPlayer: 1
 --- !u!114 &114920636853806778
 MonoBehaviour:

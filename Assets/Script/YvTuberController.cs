@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using Vuforia;
 
 public class YvTuberController : NetworkBehaviour
 {
@@ -18,6 +19,9 @@ public class YvTuberController : NetworkBehaviour
     private SteamVR_ControllerManager stController;
     private SteamVR_Camera stCamera ;
 
+	[SerializeField]
+	private int baseIndex = 0;
+
 	/// <summary>
 	/// 受け取ったいいね！の数
 	/// </summary>
@@ -33,6 +37,12 @@ public class YvTuberController : NetworkBehaviour
 	public int DislikeCount{ get{  return disLikeCount;}}
 
 	/// <summary>
+	/// 自身の土台となるオブジェクト 来場者から見られる時だけ使用
+	/// </summary>
+	private ImageTargetBehaviour myBase = null;
+
+	private TrackableBehaviour.Status trackableStatusPrev = TrackableBehaviour.Status.NOT_FOUND;
+	/// <summary>
 	/// ダミープレイヤーか？
 	/// </summary>
 	[SerializeField]
@@ -44,6 +54,7 @@ public class YvTuberController : NetworkBehaviour
 		if( tuberList == null ) tuberList = new List<YvTuberController>();
 		tuberList.Add( this );
 	}
+		
 
 	[Client]
     public override void OnStartLocalPlayer()
@@ -71,6 +82,28 @@ public class YvTuberController : NetworkBehaviour
 		disLikeCount = 0;
 	}
 
+	public override void OnStartClient ()
+	{
+		base.OnStartClient ();
+
+		// 来場者プレイヤーの環境のみ処理する
+		if( NetworkScript.instance.AppType != NetworkScript.AppTypeEnum.Audience ) return;
+
+		// 最初は非表示
+		modelRoot.SetActive( false );
+
+		var baseImageTarget = YvGameManager.instance.GetBase( baseIndex );
+		if( baseImageTarget == null ) 	
+		{
+			Debug.LogError( baseIndex.ToString() + "に該当するベースが存在しない" );
+			return;
+		}
+
+		transform.SetParent( baseImageTarget.transform, false );
+
+		myBase = baseImageTarget.GetComponent<ImageTargetBehaviour>();
+	}
+
 	[ClientCallback]
     void Update()
     {
@@ -80,6 +113,7 @@ public class YvTuberController : NetworkBehaviour
         	UpdatePosition();
 		}
         UpdateIkObjects();
+		UpdateArBehaviour();
     }
 
     /// <summary>
@@ -160,6 +194,33 @@ public class YvTuberController : NetworkBehaviour
             ik.rightHandObj.transform.Translate(-Vector3.up * Time.deltaTime);
         }
     }
+
+	/// <summary>
+	/// AR上の挙動を更新
+	/// </summary>
+	[Client]
+	private void UpdateArBehaviour()
+	{
+		/// 対象は来場者環境のみ
+		if( NetworkScript.instance.AppType != NetworkScript.AppTypeEnum.Audience ) return;
+
+		if( myBase == null ) 
+		{
+			Debug.LogWarning( gameObject.name + "はベースが未定義" );
+			return;
+		}
+
+		var newStatus = myBase.CurrentStatus;
+		if( newStatus != trackableStatusPrev )
+		{
+			Debug.Log( gameObject.name + "の表示切り替え :"  + trackableStatusPrev.ToString() + " -> " + newStatus.ToString() );
+			modelRoot.SetActive( myBase.CurrentStatus == TrackableBehaviour.Status.TRACKED
+				|| myBase.CurrentStatus == TrackableBehaviour.Status.DETECTED
+				|| myBase.CurrentStatus == TrackableBehaviour.Status.EXTENDED_TRACKED);
+		}
+
+		trackableStatusPrev = newStatus;
+	}
 
 	/// <summary>
 	/// エモートを受け取る

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using Vuforia;
 
 /// <summary>
 /// ネットワーク以外の部分の制御を行う
@@ -35,14 +36,14 @@ public class YvGameManager : NetworkBehaviour
 	/// 実況者ダミーのプレハブ
 	/// </summary>
 	[SerializeField]
-	private GameObject[] tuberDummyPrefabs;
+	private YvTuberController[] tuberDummyPrefabs;
 
 	/// <summary>
 	/// 実況者ダミーを生成するルート
 	/// tuberDummyPrefabsと長さが一致していること
 	/// </summary>
 	[SerializeField]
-	private Transform[] tuberDummyRoots;
+	private ImageTargetBehaviour[] tuberDummyBase;
 
 	// Use this for initialization
 	void Awake ()
@@ -57,19 +58,10 @@ public class YvGameManager : NetworkBehaviour
 			// ダミーを生成する
 			for( int i=0 ; i < tuberDummyPrefabs.Length ; ++i )
 			{
-				var obj = Instantiate( tuberDummyPrefabs[i] );
-				if( tuberDummyRoots.Length <= i )
-				{
-					Debug.LogError( "実況者ダミーインデックス[ " + i.ToString() + " ]に対応するルートがない");
-					continue;
-				}
-
-				var root = tuberDummyRoots[i];
-
-				obj.transform.SetParent( root, false );
+				var tuber = Instantiate( tuberDummyPrefabs[i] );
 
 				// サーバー上に生成
-				NetworkServer.Spawn( obj );
+				NetworkServer.Spawn( tuber.gameObject );
 			}
 		}
 
@@ -83,5 +75,17 @@ public class YvGameManager : NetworkBehaviour
 	// Update is called once per frame
 	void Update () {
 		
+	}
+
+	[Client]
+	public ImageTargetBehaviour GetBase( int index )
+	{
+		if( tuberDummyBase.Length <= index )
+		{
+			Debug.LogError( "実況者ダミーインデックス[ " + index.ToString() + " ]に対応するルートがない");
+			return null;
+		}
+
+		return tuberDummyBase[index];
 	}
 }
