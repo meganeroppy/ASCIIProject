@@ -82,26 +82,39 @@ public class YvTuberController : NetworkBehaviour
 		disLikeCount = 0;
 	}
 
+	[Client]
 	public override void OnStartClient ()
 	{
 		base.OnStartClient ();
 
-		// 来場者プレイヤーの環境のみ処理する
-		if( NetworkScript.instance.AppType != NetworkScript.AppTypeEnum.Audience ) return;
+		if( NetworkScript.instance.AppType == NetworkScript.AppTypeEnum.Tuber ) 
+		{		
+			// 自身も実況者の場合
 
-		// 最初は非表示
-		modelRoot.SetActive( false );
+			// 自分自身に対する処理はOnStartLocalPlayerと重複するのでなにもしない
+			if( isLocalPlayer ) return;
 
-		var baseImageTarget = YvGameManager.instance.GetBase( baseIndex );
-		if( baseImageTarget == null ) 	
-		{
-			Debug.LogError( baseIndex.ToString() + "に該当するベースが存在しない" );
-			return;
+			// 自分自身でなければ非表示
+			modelRoot.SetActive( false );
 		}
+		else
+		{
+			// 自身が来場者プレイヤーの場合
 
-		transform.SetParent( baseImageTarget.transform, false );
+			// 最初は非表示
+			modelRoot.SetActive( false );
 
-		myBase = baseImageTarget.GetComponent<ImageTargetBehaviour>();
+			var baseImageTarget = YvGameManager.instance.GetBase( baseIndex );
+			if( baseImageTarget == null ) 	
+			{
+				Debug.LogError( baseIndex.ToString() + "に該当するベースが存在しない" );
+				return;
+			}
+
+			transform.SetParent( baseImageTarget.transform, false );
+
+			myBase = baseImageTarget.GetComponent<ImageTargetBehaviour>();
+		}
 	}
 
 	[ClientCallback]
