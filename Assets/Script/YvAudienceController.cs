@@ -67,8 +67,6 @@ public class YvAudienceController : NetworkBehaviour
 
 	public override void OnStartClient ()
 	{
-        Debug.Log("OnStartClient");
-
 		base.OnStartClient ();
 
 		// 初期位置と回転を指定する
@@ -83,10 +81,16 @@ public class YvAudienceController : NetworkBehaviour
         }
     }
 
+	public override void OnStartLocalPlayer ()
+	{
+		base.OnStartLocalPlayer ();
+
+		// 自身をARカメラの子要素にする
+		transform.SetParent( YvGameManager.instance.ArCamera.transform, false ); 
+	}
+
 	void Start()
 	{
-		Debug.Log("Start");
-
 		// 自身専用オブジェクトを有効
 		if (isLocalPlayer)
 		{
