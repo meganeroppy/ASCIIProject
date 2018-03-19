@@ -13,6 +13,7 @@ public class YvTuberController : NetworkBehaviour
 
     [SerializeField]
     private GameObject modelRoot;
+	public bool ModelRootActive{ get{return modelRoot.activeSelf;}}
 
     private IKControl ik;
 

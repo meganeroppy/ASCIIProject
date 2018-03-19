@@ -161,6 +161,9 @@ public class YvAudienceController : NetworkBehaviour
 		// 範囲内リストを取得
 		var inRange = YvTuberController.tuberList.FindAll(  o => Vector3.Distance( o.transform.position, transform.position ) <= threshold  );
 
+		// 表示されていないものは除外
+		inRange = inRange.FindAll( o => o.ModelRootActive );
+
 		// リストが空ならフォーカス中なし
 		if( inRange.Count <= 0 )
 		{
