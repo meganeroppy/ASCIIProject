@@ -62,10 +62,7 @@ public class YvTuberController : NetworkBehaviour
         base.OnStartLocalPlayer();
 
         // 自分の時は強制表示フラグがない限り自身のモデルを非表示
-		if( !NetworkScript.instance.ForceDisplaySelf )
-        {
-            modelRoot.SetActive(false);
-        }
+        modelRoot.SetActive(NetworkScript.instance.ForceDisplaySelf);
 
         ik = GetComponent<IKControl>();
 
@@ -90,9 +87,6 @@ public class YvTuberController : NetworkBehaviour
 		if( NetworkScript.instance.AppType == NetworkScript.AppTypeEnum.Tuber ) 
 		{		
 			// 自身も実況者の場合
-
-			// 自分自身に対する処理はOnStartLocalPlayerと重複するのでなにもしない
-			if( isLocalPlayer ) return;
 
 			// 自分自身でなければ非表示
 			modelRoot.SetActive( false );
