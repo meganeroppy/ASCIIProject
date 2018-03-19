@@ -75,9 +75,11 @@ public class YvTuberController : NetworkBehaviour
 	{
 		base.OnStartServer ();
 
-		// とりあえず現状は起動時にいいね/微妙だねかうんとを0にしてしまう
-		likeCount = 0;
-		disLikeCount = 0;
+		// いいね/微妙だねカウントをローカルセーブから取得
+		likeCount = PlayerPrefs.GetInt( "TuberGood" + baseIndex.ToString(), 0 );
+		disLikeCount = PlayerPrefs.GetInt( "TuberBad" + baseIndex.ToString(), 0 );
+
+		Debug.Log("エモート数をロード : ID = " + baseIndex.ToString() + " " + likeCount.ToString() + "いいね / " + disLikeCount.ToString() + "微妙だね");
 	}
 
 	[Client]
@@ -240,11 +242,17 @@ public class YvTuberController : NetworkBehaviour
 		{
 			likeCount++;
 			Debug.Log( "NetId = " + netId.ToString() + " の来場者から NetId = " + this.netId.ToString() + "の実況者に「いいね！」がとどいた" );
+
+			// ローカルに保存
+			PlayerPrefs.SetInt( "TuberGood" + baseIndex.ToString(), likeCount );
 		}
 		else
 		{
 			disLikeCount++;
 			Debug.Log( "NetId = " + netId.ToString() + " の来場者から NetId = " + this.netId.ToString() + "の実況者に「微妙だね！」がとどいた" );
+
+			// ローカルに保存
+			PlayerPrefs.SetInt( "TuberBad" + baseIndex.ToString(), disLikeCount );
 		}
 	}
 
