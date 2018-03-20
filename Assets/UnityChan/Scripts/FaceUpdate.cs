@@ -15,7 +15,6 @@ namespace UnityChan
 			anim = GetComponent<Animator> ();
 		}
 
-/*
 		void OnGUI ()
 		{
 			GUILayout.Box ("Face Update", GUILayout.Width (170), GUILayout.Height (25 * (animations.Length + 2)));
@@ -29,7 +28,6 @@ namespace UnityChan
 			isKeepFace = GUILayout.Toggle (isKeepFace, " Keep Face");
 			GUILayout.EndArea ();
 		}
-*/
 
 		float current = 0;
 
