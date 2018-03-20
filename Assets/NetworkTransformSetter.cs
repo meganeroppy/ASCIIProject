@@ -12,16 +12,7 @@ public class NetworkTransformSetter : NetworkBehaviour
     private Transform root;
     Transform[] childTransformList;
 
-    // Use this for initialization
-    public override void OnStartLocalPlayer()
-    {
-        base.OnStartLocalPlayer();
-
-        Exec();
-
-	}
-
-    private void Exec()
+    private void Awake()
     {
         childTransformList = root.GetComponentsInChildren<Transform>();
 
