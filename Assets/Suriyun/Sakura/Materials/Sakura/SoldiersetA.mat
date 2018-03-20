@@ -44,7 +44,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _DepthBias: 0.00012
-    - _EdgeThickness: 0
+    - _EdgeThickness: 3
     - _FalloffPower: 0.3
     - _SpecularPower: 20
     m_Colors:

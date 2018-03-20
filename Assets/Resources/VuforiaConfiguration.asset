@@ -8,17 +8,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -2067402452, guid: 1e108ae5f2133934f948edded555f03e, type: 3}
+  m_Script: {fileID: -2067402452, guid: bab6fa851cf5a1a4bba3cec5f191cb8e, type: 3}
   m_Name: VuforiaConfiguration
   m_EditorClassIdentifier: 
   vuforia:
     vuforiaLicenseKey: 
-    ufoLicenseKey: QVpYS0Zmci8vLy8vQUFBQUtLd0FOZXRocjAzUnJRcEVDNy9kcHBzYTQwbmplVmRFVzhIamNiY28xYllqcnFKSGpJSk12NUR3KzJyQU5kNTZhK1kwQWZERUFTUStEY1R3dmt4b2d4TGUyRzRkR2s1emhRUXBRNXlIaUxwa3dvTURGRjZlazV1K2x2UmlTVUl1TVBzeVVacFFSZnR5OEdxNTFrNFBVUnU4LzcwV3Q0OTF5RVZudHpDZWNQa3Zpb1loRldHN3Y2NmJwSFNROXlwTGZYbXl5WFJjUVd0Q2ZpZXF5cEdsWmJXdDZVVGpWNFIyeEhyNys0cVAxNFpldVlETnloMXYxeXV6V1kwM3ZaYlhVRHZVS1VrVEdzajlLdmk1SUY2Q2hRTzdaZExGNElqMTdrY25WRlBqZCtmdVJpYlhEYlUyUVN3UUdjaGM0ZnFWZmxiNkhjWk1oRFNyS2JnSldjWStVTlA2WWtTTFd1WTBUaWZ5eUVoNXVuc1Y=
+    ufoLicenseKey: QVV6UVplLy8vLy8vQUFBQUtPSWUxZ09OQTBqVmlPR0xYWlVOUGllQkd1dEgvZWxEbFFVUnJObTVJY1dNUWhwOVBheW4zWFl5NldqRlpIL0N0b2RIN0k5WTAwY3Z4Y2xxNzJvKzJ5bE5LUnhnK0IvRUFGa3N1Z3VkM244M0NLYzA2MFJnMkorR3AyZEw1bE9za3NaaGFlU0Zsd0VLRWhuRk5XeXlkTHhGQjJmcmJubTQ2T3JBVDJ5cFErdm1EVUxiUTI3M2pueWNmRk1LaGZuZnpkaytsN0IrOTVpY0tJZm9lSk44NGJZQTI2czExL1Q4MHJnNXA4QjRrN1dDRTd3Nk92bzhJU210Ri96NWxsS2txOGpnRTgvMExaQ0JCUHNaanltU2libWJaaU95VGZ1SUd0MzcyeW9xRnJTSzM0TERkOWVWY2pMTlMzTW9Ka0dFeTVQSzhxaThCSEExY2xQbThpQzRzRzZzbjlCbElFTndPeEJKYzNidFNMekY=
     delayedInitialization: 0
-    cameraDeviceModeSetting: -1
-    maxSimultaneousImageTargets: 5
+    cameraDeviceModeSetting: -3
+    maxSimultaneousImageTargets: 4
     maxSimultaneousObjectTargets: 1
-    useDelayedLoadingObjectTargets: 0
+    useDelayedLoadingObjectTargets: 1
     cameraDirection: 0
     mirrorVideoBackground: 0
   digitalEyewear:
@@ -27,8 +27,8 @@ MonoBehaviour:
     eyewearType: 0
     stereoFramework: 0
     seeThroughConfiguration: 0
-    viewerName: 
-    viewerManufacturer: 
+    viewerName: Generic Cardboard
+    viewerManufacturer: Vuforia
     useCustomViewer: 0
     customViewer:
       Version: 0
@@ -45,10 +45,8 @@ MonoBehaviour:
   databaseLoad:
     dataSetsToLoad:
     - VuforiaMars_Images
-    - VuforiaMars_VuMark
     dataSetsToActivate:
     - VuforiaMars_Images
-    - VuforiaMars_VuMark
   videoBackground:
     clippingMode: 0
     numDivisions: 2
