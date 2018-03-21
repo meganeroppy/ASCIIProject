@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="qcar_config.xsd">
+  <Tracking>
+    <ImageTarget name="VLAST_Stage" size="1.000000 0.578947" />
+    <ImageTarget name="VLAST_Unity" size="1.000000 0.578947" />
+    <ImageTarget name="VLAST001" size="1.000000 1.727273" />
+    <ImageTarget name="VLAST006" size="1.000000 1.727273" />
+    <ImageTarget name="VLAST005" size="1.000000 1.727273" />
+    <ImageTarget name="VLAST004" size="1.000000 1.727273" />
+    <ImageTarget name="VLAST003" size="1.000000 1.727273" />
+    <ImageTarget name="VLAST002" size="1.000000 1.727273" />
+  </Tracking>
+</QCARConfig>
