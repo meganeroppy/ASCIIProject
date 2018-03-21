@@ -2,11 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using Vuforia;
 
 public class StageManager : NetworkBehaviour
 {
     [SerializeField]
     private GameObject root;
+
+	/// <summary>
+	/// 自身の土台となるオブジェクト 来場者から見られる時だけ使用
+	/// </summary>
+	private ImageTargetBehaviour myBase = null;
+
+	private TrackableBehaviour.Status trackableStatusPrev = TrackableBehaviour.Status.NOT_FOUND;
 
     void Start()
     {
@@ -37,8 +45,32 @@ public class StageManager : NetworkBehaviour
             }
 
             transform.SetParent(baseImageTarget.transform, false);
-        //    myBase = baseImageTarget.GetComponent<ImageTargetBehaviour>();
+            myBase = baseImageTarget.GetComponent<ImageTargetBehaviour>();
         }
     }
+
+	[ClientCallback]
+	void Update()
+	{
+		/// 対象は来場者環境のみ
+		if( NetworkScript.instance.AppType != NetworkScript.AppTypeEnum.Audience ) return;
+
+		if( myBase == null ) 
+		{
+			Debug.LogWarning( gameObject.name + "はベースが未定義" );
+			return;
+		}
+
+		var newStatus = myBase.CurrentStatus;
+		if( newStatus != trackableStatusPrev )
+		{
+			Debug.Log( gameObject.name + "の表示切り替え :"  + trackableStatusPrev.ToString() + " -> " + newStatus.ToString() );
+			root.SetActive( myBase.CurrentStatus == TrackableBehaviour.Status.TRACKED
+				|| myBase.CurrentStatus == TrackableBehaviour.Status.DETECTED
+				|| myBase.CurrentStatus == TrackableBehaviour.Status.EXTENDED_TRACKED);
+		}
+
+		trackableStatusPrev = newStatus;
+	}
 
 }

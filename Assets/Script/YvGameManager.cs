@@ -39,11 +39,11 @@ public class YvGameManager : NetworkBehaviour
 	private YvTuberController[] tuberDummyPrefabs;
 
 	/// <summary>
-	/// 実況者ダミーを生成するルート
-	/// tuberDummyPrefabsと長さが一致していること
+	/// 実況者を生成するルート
+	/// 0は中の人用 1~はダミー用
 	/// </summary>
 	[SerializeField]
-	private ImageTargetBehaviour[] tuberDummyBase;
+	private ImageTargetBehaviour[] tuberBase;
 
     /// <summary>
     /// ステージのプレハブ
@@ -97,12 +97,12 @@ public class YvGameManager : NetworkBehaviour
 	[Client]
 	public ImageTargetBehaviour GetTuberBase( int index )
 	{
-		if( tuberDummyBase.Length <= index )
+		if( tuberBase.Length <= index )
 		{
 			Debug.LogError( "実況者ダミーインデックス[ " + index.ToString() + " ]に対応するルートがない");
 			return null;
 		}
 
-		return tuberDummyBase[index];
+		return tuberBase[index];
 	}
 }

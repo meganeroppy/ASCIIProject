@@ -4862,7 +4862,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   modelRoot: {fileID: 1459927316260460}
-  baseIndex: 3
+  baseIndex: 2
   isDummyPlayer: 1
 --- !u!136 &136469967920835460
 CapsuleCollider:
