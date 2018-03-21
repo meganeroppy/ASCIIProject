@@ -92,8 +92,8 @@ public class YvGameManager : NetworkBehaviour
 			}
 
             // ステージを生成
-            var stage = Instantiate(stagePrefab);
-            NetworkServer.Spawn(stage.gameObject);        
+        //    var stage = Instantiate(stagePrefab);
+        //    NetworkServer.Spawn(stage.gameObject);        
 		}
 
         // 自分が実況者でなければカメラリグその他を無効
