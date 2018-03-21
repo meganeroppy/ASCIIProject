@@ -62,6 +62,12 @@ public class YvAudienceController : NetworkBehaviour
 	[SerializeField]
 	private GameObject[] uiSet;
 
+    [SerializeField]
+    private Text scoreText;
+
+    private float scoreUpdateTimer = 0;
+    private float scoreUpdateInterval = 5f;
+
     void Awake()
     {
         Debug.Log("Awake");
@@ -325,7 +331,26 @@ public class YvAudienceController : NetworkBehaviour
 		}
 
 		focusIndexPrev = d.currentFocusIndex;
-	}
+
+        // スコア表示更新
+        {
+            // ５秒に一回更新
+            scoreUpdateTimer += Time.deltaTime;
+            if (scoreUpdateTimer < scoreUpdateInterval) return;
+            scoreUpdateTimer = 0;
+
+            int val = 0;
+            // スコア
+            var tuber = YvTuberController.tuberList.Find(t => t.netId.ToString() == currentFocusChannel);
+            if (tuber != null)
+            {
+                val = tuber.LikeCount;
+            }
+
+            scoreText.text = "Score : " + val.ToString();
+
+        }
+    }
 
 	/// <summary>
 	/// インデックスからNetIdを取得する
