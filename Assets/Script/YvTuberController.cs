@@ -22,6 +22,7 @@ public class YvTuberController : NetworkBehaviour
 
 	[SerializeField]
 	private int baseIndex = 0;
+	public int BaseIndex{ get{ return baseIndex; } }
 
 	/// <summary>
 	/// 受け取ったいいね！の数

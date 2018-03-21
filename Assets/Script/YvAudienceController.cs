@@ -48,11 +48,19 @@ public class YvAudienceController : NetworkBehaviour
     [SerializeField]
     private GameObject[] localOnlyObjects;
 
+	private int focusIndexPrev = -1;
+
     /// <summary>
     /// いいね！ボタン＆微妙だね！ボタン
     /// </summary>
     [SerializeField]
     private Button[] emoteButtons; 
+
+	/// <summary>
+	/// フォーカス中のTuberのUiセット
+	/// </summary>
+	[SerializeField]
+	private GameObject[] uiSet;
 
     void Awake()
     {
@@ -122,10 +130,10 @@ public class YvAudienceController : NetworkBehaviour
 		// 自身でなければなにもしない
 		if( !isLocalPlayer ) return;
 
-		UpdateFocusChannel();
+	//	UpdateFocusChannel();
 		UpdateTempInput();
-        UpdateUI();
-
+	//	UpdateUI();
+		UpdateUIFromDistanceSensor();
 	}
 
     /// <summary>
@@ -136,7 +144,7 @@ public class YvAudienceController : NetworkBehaviour
     {
         prevFocusCannel = currentFocusChannel;
     }
-
+		
 	/// <summary>
 	/// ターゲットとの距離に応じてフォーカス対象を変更する
 	/// </summary>
@@ -198,6 +206,7 @@ public class YvAudienceController : NetworkBehaviour
 			Debug.LogWarning("フォーカス中のチャンネルなし");
 			return;
 		}
+
 		// 対象の実況者を取得
 		var target = YvTuberController.tuberList.Find( o => o.netId.ToString() == currentFocusChannel );
 		if( target == null )
@@ -267,6 +276,68 @@ public class YvAudienceController : NetworkBehaviour
             }
         }
     }
+
+	/// <summary>
+	/// DistanceSensorの値を使用してUI表示変更
+	/// </summary>
+	[Client]
+	private void UpdateUIFromDistanceSensor()
+	{
+		var d = DistanceSensor.instance;
+		if( d == null ) return;
+
+		if( d.currentFocusIndex == -1 )
+		{
+			foreach( GameObject b in uiSet )
+			{
+				b.SetActive( false );
+			}
+
+			//ボタンを無効にする
+			foreach( Button b in emoteButtons)
+			{
+				b.gameObject.SetActive(false);
+			}
+		}
+		else
+		{
+			for( int i=0 ; i < uiSet.Length ; ++i )
+			{
+				uiSet[i].SetActive( i == d.currentFocusIndex );
+			}
+
+			// ボタンを有効にする
+			foreach( Button b in emoteButtons)
+			{
+				b.gameObject.SetActive(true);
+				b.interactable = true;
+			}
+		}
+
+		// チャンネルに変換
+		if( focusIndexPrev != d.currentFocusIndex )
+		{
+			currentFocusChannel = GetNetIdByIndex( d.currentFocusIndex );
+		}
+
+		focusIndexPrev = d.currentFocusIndex;
+	}
+
+	/// <summary>
+	/// インデックスからNetIdを取得する
+	/// </summary>
+	private string GetNetIdByIndex( int idx )
+	{
+		var result = YvTuberController.tuberList.Find( t => t.BaseIndex == idx );
+
+		if( result == null )
+		{
+			Debug.LogWarning( "インデックス " + idx.ToString() +  "のTuberが存在しない");
+			return "";
+		}
+
+		return result.netId.ToString();
+	}
 
 	/// <summary>
 	/// エモートの送信をサーバー側で行う

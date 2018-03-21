@@ -2,7 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DistanceSensor : MonoBehaviour {
+public class DistanceSensor : MonoBehaviour 
+{
+	/// <summary>
+	/// インスタンス
+	/// </summary>
+	public static DistanceSensor instance;
 
     public const float NOTHING = -1;    // 計測不能
 
@@ -13,9 +18,41 @@ public class DistanceSensor : MonoBehaviour {
     public float maxDistance = 5;      // 計測可能な最大距離
     public float distance;              // 計測距離
 
+	private float interval = 1f;
+
+	private float timer = 0;
+
+	[SerializeField]
+	private GameObject particle;
+	public GameObject Particle { get {  return particle;} }
+
+	[SerializeField]
+	private GameObject loveTarget;
+	public GameObject LoveTarget { get {  return loveTarget;} }
+
+	[SerializeField]
+	private ScoreController scoreController;
+	public ScoreController ScoreController { get {  return scoreController;} }
+	/// <summary>
+	/// フォーカス中なしは -1
+	/// </summary>
+	/// <value>The index of the current forus.</value>
+	public int currentFocusIndex { get; private set; }
+
+	void Awake()
+	{
+		instance = this;
+		currentFocusIndex = -1;
+	}
+
     // 距離計測
     void Update()
     {
+		// インターバルの感覚で処理
+		timer += Time.deltaTime;
+		if( timer < interval ) return;
+		timer = 0;
+
         // 前方ベクトル計算
         Vector3 fwd = transform.TransformDirection(Vector3.forward);
 
@@ -28,41 +65,50 @@ public class DistanceSensor : MonoBehaviour {
             //Rayが当たったオブジェクトのtagがPlayerだったら
             if (hit.collider.tag == "Target_A")
             {
-                Canvas_flowerA.SetActive(true);
-                Canvas_flowerB.SetActive(false);
-                Canvas_flowerC.SetActive(false);
+				currentFocusIndex = 0;
+            //    Canvas_flowerA.SetActive(true);
+            //    Canvas_flowerB.SetActive(false);
+            //    Canvas_flowerC.SetActive(false);
 
                 Debug.Log("Target_A:"+distance);
             }
             else if (hit.collider.tag == "Target_B")
             {
-                Canvas_flowerA.SetActive(false);
-                Canvas_flowerB.SetActive(true);
-                Canvas_flowerC.SetActive(false);
+				currentFocusIndex = 1;
+            //    Canvas_flowerA.SetActive(false);
+            //    Canvas_flowerB.SetActive(true);
+            //    Canvas_flowerC.SetActive(false);
 
                 Debug.Log("Target_B:" + distance);
             }
             else if(hit.collider.tag == "Target_C")
             {
-                Canvas_flowerA.SetActive(false);
-                Canvas_flowerB.SetActive(false);
-                Canvas_flowerC.SetActive(true);
+				currentFocusIndex = 2;
+
+            //    Canvas_flowerA.SetActive(false);
+            //    Canvas_flowerB.SetActive(false);
+            //    Canvas_flowerC.SetActive(true);
 
                 Debug.Log("Target_C:" + distance);
             }
             else
             {
-                Canvas_flowerA.SetActive(false);
-                Canvas_flowerB.SetActive(false);
-                Canvas_flowerC.SetActive(false);
+				currentFocusIndex = -1;
+
+            //    Canvas_flowerA.SetActive(false);
+            //    Canvas_flowerB.SetActive(false);
+            //    Canvas_flowerC.SetActive(false);
+				Debug.Log("Something:" + distance);
             }
 
         }
         else
         {
-            Canvas_flowerA.SetActive(false);
-            Canvas_flowerB.SetActive(false);
-            Canvas_flowerC.SetActive(false);
+			currentFocusIndex = -1;
+
+			//    Canvas_flowerA.SetActive(false);
+			//    Canvas_flowerB.SetActive(false);
+			//    Canvas_flowerC.SetActive(false);
 
             distance = NOTHING;
         }
