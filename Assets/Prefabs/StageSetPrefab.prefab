@@ -1,0 +1,169 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1175127496204446}
+  m_IsPrefabParent: 1
+--- !u!1 &1175127496204446
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4176442042854162}
+  - component: {fileID: 114416768526125976}
+  - component: {fileID: 114993794109993134}
+  m_Layer: 0
+  m_Name: StageSetPrefab
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1828883065614532
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4235840501765550}
+  - component: {fileID: 114716607475051824}
+  - component: {fileID: 95717968507572628}
+  m_Layer: 0
+  m_Name: StageDirector
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4176442042854162
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1175127496204446}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4235840501765550}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4235840501765550
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1828883065614532}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4176442042854162}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &95717968507572628
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1828883065614532}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 131eac9afafe44489b85547f44b6704e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114416768526125976
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1175127496204446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 174
+    i1: 216
+    i2: 148
+    i3: 120
+    i4: 112
+    i5: 204
+    i6: 202
+    i7: 20
+    i8: 168
+    i9: 101
+    i10: 37
+    i11: 32
+    i12: 85
+    i13: 188
+    i14: 159
+    i15: 27
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
+--- !u!114 &114716607475051824
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1828883065614532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5324f089717a74a5ba46dc8db576ab58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ignoreFastForward: 1
+  musicPlayerPrefab: {fileID: 1204985867418374, guid: 7732927338fc6ac479f080806547f6fb,
+    type: 2}
+  mainCameraRigPrefab: {fileID: 100000, guid: 0f58e0fe394b24ed58b332f76fa9c423, type: 2}
+  prefabsNeedsActivation:
+  - {fileID: 100006, guid: db5cc803f9eaf4239ae82229a11bd471, type: 2}
+  - {fileID: 100270, guid: c2455b87c898eb646a195c31546b1481, type: 2}
+  prefabsOnTimeline: []
+  miscPrefabs:
+  - {fileID: 100000, guid: 0329b91dd79424babb86c8dbc3919134, type: 2}
+  - {fileID: 100000, guid: f468251a01e8242df8066e377619a712, type: 2}
+  - {fileID: 1712279867911926, guid: c3deb5149e42650468f8237c64b7a031, type: 2}
+  - {fileID: 1392579564374226, guid: 229933020d3d60347bdf71a06fab95a3, type: 2}
+  - {fileID: 1363909754354258, guid: 98d59c89657ba4d419dd3da7c18ff68b, type: 2}
+  - {fileID: 1607488049999278, guid: 3a04e9b6dad693849b8b3d0a7d3a60b2, type: 2}
+  - {fileID: 1742682893374556, guid: 21ad670ad1290044d808e95764155658, type: 2}
+  - {fileID: 100000, guid: 0291ac2d4e1e54df6bfa4776e3683a24, type: 2}
+  cameraPoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  overlayIntensity: 0.68
+  stageParent: {fileID: 4235840501765550}
+--- !u!114 &114993794109993134
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1175127496204446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 954159b8cd2743444a6ea19aa1b37bb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  root: {fileID: 1828883065614532}

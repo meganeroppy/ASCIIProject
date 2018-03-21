@@ -15,10 +15,28 @@ public class CameraSwitcher : MonoBehaviour
     Transform target;
     Vector3 followPoint;
 
+    
     void Start()
     {
-        // Target information.
-        target = GameObject.Find(targetName).transform;
+        StartCoroutine(OnStart());
+    }
+
+    IEnumerator OnStart()
+    {
+        float retry = 1f;
+
+        GameObject targetObj = null;
+        do
+        {
+            // Target information.
+            targetObj = GameObject.Find(targetName);
+
+            yield return new WaitForSeconds(retry);
+        }
+        while (!targetObj);
+
+        target = targetObj.transform;
+
         followPoint = target.position;
 
         // Initialize DOF fx.
@@ -31,6 +49,8 @@ public class CameraSwitcher : MonoBehaviour
 
     void Update()
     {
+        if (target == null) return;
+
         // Update the follow point with the exponential easing function.
         var param = Mathf.Exp(-rotationSpeed * Time.deltaTime);
         followPoint = Vector3.Lerp(target.position, followPoint, param);
@@ -42,8 +62,12 @@ public class CameraSwitcher : MonoBehaviour
     // Change the camera position.
     public void ChangePosition(Transform destination, bool forceStable = false)
     {
+        if (target == null) return;
+
         // Do nothing if disabled.
         if (!enabled) return;
+
+        if (destination == null) return;
 
         // Move to the point.
         transform.position = destination.position;
@@ -62,6 +86,8 @@ public class CameraSwitcher : MonoBehaviour
     // Choose a point other than the current.
     Transform ChooseAnotherPoint(Transform current)
     {
+        if (target == null) return null;
+
         while (true)
         {
             var next = points[Random.Range(0, points.Length)];

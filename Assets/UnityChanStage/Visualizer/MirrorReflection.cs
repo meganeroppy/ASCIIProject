@@ -74,7 +74,7 @@ public class MirrorReflection : MonoBehaviour
 		Vector3 euler = cam.transform.eulerAngles;
 		reflectionCamera.transform.eulerAngles = new Vector3(0, euler.y, euler.z);
 		reflectionCamera.depthTextureMode = DepthTextureMode.Depth;
-		reflectionCamera.Render();
+		//reflectionCamera.Render(); エラーがでるのでいったんコメントアウト
 
 		// copy depth
 		Graphics.SetRenderTarget(m_ReflectionDepthTexture);

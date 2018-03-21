@@ -45,8 +45,20 @@ public class YvGameManager : NetworkBehaviour
 	[SerializeField]
 	private ImageTargetBehaviour[] tuberDummyBase;
 
-	// Use this for initialization
-	void Awake ()
+    /// <summary>
+    /// ステージのプレハブ
+    /// </summary>
+    [SerializeField]
+    private NetworkIdentity stagePrefab;
+
+    /// <summary>
+    /// ステージ生成ベース
+    /// </summary>
+    [SerializeField]
+    private ImageTargetBehaviour stageBase;
+
+    // Use this for initialization
+    void Awake ()
     {
         instance = this;
 	}
@@ -63,6 +75,10 @@ public class YvGameManager : NetworkBehaviour
 				// サーバー上に生成
 				NetworkServer.Spawn( tuber.gameObject );
 			}
+
+            // ステージを生成
+            var stage = Instantiate(stagePrefab);
+            NetworkServer.Spawn(stage.gameObject);        
 		}
 
 		// 自分が実況者でなければカメラリグ無効

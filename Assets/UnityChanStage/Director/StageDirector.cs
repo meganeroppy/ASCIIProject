@@ -27,27 +27,27 @@ public class StageDirector : MonoBehaviour
     GameObject[] objectsNeedsActivation;
     GameObject[] objectsOnTimeline;
 
-    public Transform stageParent = null;
+    [SerializeField]
+    private Transform stageParent = null;
 
     void Awake()
     {
-        var transform = stageParent;
         // Instantiate the prefabs.
-        musicPlayer = (GameObject)Instantiate(musicPlayerPrefab, transform);
+        musicPlayer = (GameObject)Instantiate(musicPlayerPrefab, stageParent);
 
-        var cameraRig = (GameObject)Instantiate(mainCameraRigPrefab, transform);
+        var cameraRig = (GameObject)Instantiate(mainCameraRigPrefab, stageParent);
         mainCameraSwitcher = cameraRig.GetComponentInChildren<CameraSwitcher>();
         screenOverlays = cameraRig.GetComponentsInChildren<ScreenOverlay>();
 
         objectsNeedsActivation = new GameObject[prefabsNeedsActivation.Length];
         for (var i = 0; i < prefabsNeedsActivation.Length; i++)
-            objectsNeedsActivation[i] = (GameObject)Instantiate(prefabsNeedsActivation[i], transform);
+            objectsNeedsActivation[i] = (GameObject)Instantiate(prefabsNeedsActivation[i], stageParent);
 
         objectsOnTimeline = new GameObject[prefabsOnTimeline.Length];
         for (var i = 0; i < prefabsOnTimeline.Length; i++)
-            objectsOnTimeline[i] = (GameObject)Instantiate(prefabsOnTimeline[i], transform);
+            objectsOnTimeline[i] = (GameObject)Instantiate(prefabsOnTimeline[i], stageParent);
 
-        foreach (var p in miscPrefabs) Instantiate(p, transform);
+        foreach (var p in miscPrefabs) Instantiate(p, stageParent);
     }
 
     void Update()

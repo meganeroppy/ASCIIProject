@@ -895,7 +895,7 @@ GameObject:
   m_Component:
   - component: {fileID: 400270}
   m_Layer: 20
-  m_Name: Stage
+  m_Name: StagePrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8681,7 +8681,7 @@ MonoBehaviour:
   - {fileID: 4957477995109602}
   - {fileID: 4984592769304118}
   randomRotation: 0
-  parent: {fileID: 0}
+  parent: {fileID: 4568678166735036}
 --- !u!114 &114266103124657956
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -42,12 +42,20 @@ public class NetworkScript : NetworkManager
 	private float focusChangeThreshold = 1f;
 	public float FocusChangeThreshold{get{return focusChangeThreshold;}}
 
+    [SerializeField]
+    private bool enableIKinema = true;
 
     /// <summary>
     /// 実況者プレハブ
     /// </summary>
     [SerializeField]
     private GameObject playerPrefabTuber;
+
+    /// <summary>
+    /// 実況者プレハブiKinema併用版
+    /// </summary>
+    [SerializeField]
+    private GameObject playerPrefabTuberIKinema;
 
     /// <summary>
     /// 来場者プレハブ
@@ -60,7 +68,14 @@ public class NetworkScript : NetworkManager
     /// </summary>
     [SerializeField]
 	private bool forceDisplaySelf;
-	public bool ForceDisplaySelf{get{ return forceDisplaySelf; }} 
+	public bool ForceDisplaySelf{get{ return forceDisplaySelf; }}
+
+    /// <summary>
+    /// Tuberの時でもステージを表示するか？
+    /// </summary>
+    [SerializeField]
+    private bool forceDisplayStage;
+    public bool ForceDisplayStage { get { return forceDisplayStage; } }
 
     [SerializeField]
     public Canvas canvas;
@@ -90,9 +105,6 @@ public class NetworkScript : NetworkManager
 
     public void OnHostButton()
     {
-        // 自分のアプリタイプによってプレハブを変える
-    //    NetworkManager.singleton.playerPrefab = appType == AppTypeEnum.Tuber ? playerPrefabTuber : playerPrefabAudience;
-
         canvas.gameObject.SetActive(false);
         StartHost();
     //    dualTouchControls.SetActive(true);
@@ -105,9 +117,6 @@ public class NetworkScript : NetworkManager
 
 	private void ConnectClient()
 	{
-		// 自分のアプリタイプによってプレハブを変える
-		//    NetworkManager.singleton.playerPrefab = appType == AppTypeEnum.Tuber ? playerPrefabTuber : playerPrefabAudience;
-
 		// テキストフィールドに値が入力されていたらそれを接続先アドレスにする
 		if (!string.IsNullOrEmpty(inputField.text))
 		{
@@ -141,8 +150,21 @@ public class NetworkScript : NetworkManager
 
         GameObject playerPrefab;
 
-        if (appType == AppTypeEnum.Tuber) playerPrefab = playerPrefabTuber;
-        else playerPrefab = playerPrefabAudience;
+        if (appType == AppTypeEnum.Tuber)
+        {
+            if (enableIKinema)
+            {
+                playerPrefab = playerPrefabTuberIKinema;
+            }
+            else
+            {
+                playerPrefab = playerPrefabTuber;
+            }
+        }
+        else
+        {
+            playerPrefab = playerPrefabAudience;
+        }
 
         GameObject player;
         Transform startPos = GetStartPosition();

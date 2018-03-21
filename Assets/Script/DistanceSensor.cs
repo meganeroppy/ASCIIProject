@@ -11,7 +11,7 @@ public class DistanceSensor : MonoBehaviour {
     public GameObject Canvas_flowerC;
 
     public float maxDistance = 5;      // 計測可能な最大距離
-    private float distance;              // 計測距離
+    public float distance;              // 計測距離
 
     // 距離計測
     void Update()
