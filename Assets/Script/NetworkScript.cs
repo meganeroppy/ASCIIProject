@@ -44,6 +44,7 @@ public class NetworkScript : NetworkManager
 
     [SerializeField]
     private bool enableIKinema = true;
+    public bool EnableIKinema { get { return enableIKinema; } }
 
     /// <summary>
     /// 実況者プレハブ

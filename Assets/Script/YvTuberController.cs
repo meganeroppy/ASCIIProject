@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-#if UNITY_ANDROID
+#if UNITY_ANDROID || UNITY_EDITOR
 using Vuforia;
 #endif
+
 public class YvTuberController : NetworkBehaviour
 {
 	/// <summary>
@@ -40,7 +41,7 @@ public class YvTuberController : NetworkBehaviour
 	private int disLikeCount;
 	public int DislikeCount{ get{  return disLikeCount;}}
 
-#if UNITY_ANDROID
+#if UNITY_ANDROID || UNITY_EDITOR
     /// <summary>
     /// 自身の土台となるオブジェクト 来場者から見られる時だけ使用
     /// </summary>
@@ -61,9 +62,19 @@ public class YvTuberController : NetworkBehaviour
 		if( tuberList == null ) tuberList = new List<YvTuberController>();
 		tuberList.Add( this );
 	}
-		
 
-	[Client]
+    public override void OnStartServer()
+    {
+        base.OnStartServer();
+
+        // いいね/微妙だねカウントをローカルセーブから取得
+        likeCount = PlayerPrefs.GetInt("TuberGood" + baseIndex.ToString(), 0);
+        disLikeCount = PlayerPrefs.GetInt("TuberBad" + baseIndex.ToString(), 0);
+
+        Debug.Log("エモート数をロード : ID = " + baseIndex.ToString() + " " + likeCount.ToString() + "いいね / " + disLikeCount.ToString() + "微妙だね");
+    }
+
+    [Client]
     public override void OnStartLocalPlayer()
     {
         base.OnStartLocalPlayer();
@@ -77,16 +88,6 @@ public class YvTuberController : NetworkBehaviour
         YvGameManager.instance.ArCamera.SetActive(false);
     }
 
-	public override void OnStartServer ()
-	{
-		base.OnStartServer ();
-
-		// いいね/微妙だねカウントをローカルセーブから取得
-		likeCount = PlayerPrefs.GetInt( "TuberGood" + baseIndex.ToString(), 0 );
-		disLikeCount = PlayerPrefs.GetInt( "TuberBad" + baseIndex.ToString(), 0 );
-
-		Debug.Log("エモート数をロード : ID = " + baseIndex.ToString() + " " + likeCount.ToString() + "いいね / " + disLikeCount.ToString() + "微妙だね");
-	}
 
 	[Client]
 	public override void OnStartClient ()
@@ -102,10 +103,11 @@ public class YvTuberController : NetworkBehaviour
 		}
 		else
 		{
-			// 自身が来場者プレイヤーの場合
+            // 自身が来場者プレイヤーの場合
+#if UNITY_ANDROID || UNITY_EDITOR
 
-			// 最初は非表示
-			modelRoot.SetActive( false );
+            // 最初は非表示
+            modelRoot.SetActive( false );
 
 			var baseImageTarget = YvGameManager.instance.GetTuberBase( baseIndex );
 			if( baseImageTarget == null ) 	
@@ -116,7 +118,6 @@ public class YvTuberController : NetworkBehaviour
 
 			transform.SetParent( baseImageTarget.transform, false );
 
-#if UNITY_ANDROID
             myBase = baseImageTarget.GetComponent<ImageTargetBehaviour>();
 #endif
         }
@@ -151,6 +152,8 @@ public class YvTuberController : NetworkBehaviour
     void UpdatePosition()
     {
 		if( !isLocalPlayer ) return;
+
+        if (NetworkScript.instance.EnableIKinema) return;
 
         // iKinema対応したら体と両足も対応する
 
@@ -222,7 +225,7 @@ public class YvTuberController : NetworkBehaviour
 		/// 対象は来場者環境のみ
 		if( NetworkScript.instance.AppType != NetworkScript.AppTypeEnum.Audience ) return;
 
-#if UNITY_ANDROID
+#if UNITY_ANDROID || UNITY_EDITOR
         if (myBase == null)
         {
             Debug.LogWarning(gameObject.name + "はベースが未定義");

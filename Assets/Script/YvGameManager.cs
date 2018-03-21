@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
-using Vuforia;
+#if UNITY_ANDROID || UNITY_EDITOR
+
+using Vuforia; 
+#endif
 
 /// <summary>
 /// ネットワーク以外の部分の制御を行う
@@ -25,6 +28,12 @@ public class YvGameManager : NetworkBehaviour
 	[SerializeField]
 	private GameObject cameraRig;
 
+    /// <summary>
+    /// 来場者専用シーンオブジェクト
+    /// </summary>
+    [SerializeField]
+    private GameObject[] objectsNotForTuber;
+
 	/// <summary>
 	/// 来場者プレイヤーの初期生成位置
 	/// </summary>
@@ -38,13 +47,16 @@ public class YvGameManager : NetworkBehaviour
 	[SerializeField]
 	private YvTuberController[] tuberDummyPrefabs;
 
-	/// <summary>
-	/// 実況者を生成するルート
-	/// 0は中の人用 1~はダミー用
-	/// </summary>
-	[SerializeField]
-	private ImageTargetBehaviour[] tuberBase;
+    /// <summary>
+    /// 実況者を生成するルート
+    /// 0は中の人用 1~はダミー用
+    /// </summary>
+#if UNITY_ANDROID || UNITY_EDITOR
 
+    [SerializeField]
+    private ImageTargetBehaviour[] tuberBase;
+
+#endif
     /// <summary>
     /// ステージのプレハブ
     /// </summary>
@@ -54,10 +66,12 @@ public class YvGameManager : NetworkBehaviour
     /// <summary>
     /// ステージ生成ベース
     /// </summary>
+#if UNITY_ANDROID || UNITY_EDITOR
     [SerializeField]
     private ImageTargetBehaviour stageBase;
     public ImageTargetBehaviour StageBase { get { return stageBase; } }
 
+#endif
     // Use this for initialization
     void Awake ()
     {
@@ -82,27 +96,38 @@ public class YvGameManager : NetworkBehaviour
             NetworkServer.Spawn(stage.gameObject);        
 		}
 
-		// 自分が実況者でなければカメラリグ無効
-		if( NetworkScript.instance.AppType != NetworkScript.AppTypeEnum.Tuber )
-		{
-			cameraRig.SetActive( false );
-		}
-	}
+        // 自分が実況者でなければカメラリグその他を無効
+        if (NetworkScript.instance.AppType != NetworkScript.AppTypeEnum.Tuber)
+        {
+            cameraRig.SetActive(false);
+        }
+        else
+        {
+            // 実況者の時はイメージターゲットなどVuforia関連を無効
+            foreach (GameObject g in objectsNotForTuber)
+            {
+                g.SetActive(false);
+            }
+        }
+    }
 	
 	// Update is called once per frame
 	void Update () {
 		
 	}
 
-	[Client]
-	public ImageTargetBehaviour GetTuberBase( int index )
-	{
-		if( tuberBase.Length <= index )
-		{
-			Debug.LogError( "実況者ダミーインデックス[ " + index.ToString() + " ]に対応するルートがない");
-			return null;
-		}
+#if UNITY_ANDROID || UNITY_EDITOR
+    [Client]
+    public ImageTargetBehaviour GetTuberBase(int index)
+    {
+        if (tuberBase.Length <= index)
+        {
+            Debug.LogError("実況者ダミーインデックス[ " + index.ToString() + " ]に対応するルートがない");
+            return null;
+        }
 
-		return tuberBase[index];
-	}
+        return tuberBase[index];
+    }
+
+#endif
 }

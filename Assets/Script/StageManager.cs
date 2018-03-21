@@ -2,19 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
-using Vuforia;
+#if UNITY_ANDROID || UNITY_EDITOR
+using Vuforia; 
+#endif
 
 public class StageManager : NetworkBehaviour
 {
     [SerializeField]
     private GameObject root;
 
-	/// <summary>
-	/// 自身の土台となるオブジェクト 来場者から見られる時だけ使用
-	/// </summary>
-	private ImageTargetBehaviour myBase = null;
+#if UNITY_ANDROID || UNITY_EDITOR
 
-	private TrackableBehaviour.Status trackableStatusPrev = TrackableBehaviour.Status.NOT_FOUND;
+    /// <summary>
+    /// 自身の土台となるオブジェクト 来場者から見られる時だけ使用
+    /// </summary>
+    private ImageTargetBehaviour myBase = null;
+
+    private TrackableBehaviour.Status trackableStatusPrev = TrackableBehaviour.Status.NOT_FOUND;
+
+#endif
 
     void Start()
     {
@@ -24,6 +30,8 @@ public class StageManager : NetworkBehaviour
             root.SetActive(false);
         }
     }
+
+#if UNITY_ANDROID || UNITY_EDITOR
 
     [Client]
     public override void OnStartClient()
@@ -49,28 +57,31 @@ public class StageManager : NetworkBehaviour
         }
     }
 
-	[ClientCallback]
+    [ClientCallback]
 	void Update()
 	{
 		/// 対象は来場者環境のみ
 		if( NetworkScript.instance.AppType != NetworkScript.AppTypeEnum.Audience ) return;
 
-		if( myBase == null ) 
-		{
-			Debug.LogWarning( gameObject.name + "はベースが未定義" );
-			return;
-		}
+        if (myBase == null)
+        {
+            Debug.LogWarning(gameObject.name + "はベースが未定義");
+            return;
+        }
 
-		var newStatus = myBase.CurrentStatus;
-		if( newStatus != trackableStatusPrev )
-		{
-			Debug.Log( gameObject.name + "の表示切り替え :"  + trackableStatusPrev.ToString() + " -> " + newStatus.ToString() );
-			root.SetActive( myBase.CurrentStatus == TrackableBehaviour.Status.TRACKED
-				|| myBase.CurrentStatus == TrackableBehaviour.Status.DETECTED
-				|| myBase.CurrentStatus == TrackableBehaviour.Status.EXTENDED_TRACKED);
-		}
+        var newStatus = myBase.CurrentStatus;
+        if (newStatus != trackableStatusPrev)
+        {
+            Debug.Log(gameObject.name + "の表示切り替え :" + trackableStatusPrev.ToString() + " -> " + newStatus.ToString());
+            root.SetActive(myBase.CurrentStatus == TrackableBehaviour.Status.TRACKED
+                || myBase.CurrentStatus == TrackableBehaviour.Status.DETECTED
+                || myBase.CurrentStatus == TrackableBehaviour.Status.EXTENDED_TRACKED);
+        }
 
-		trackableStatusPrev = newStatus;
-	}
+        trackableStatusPrev = newStatus;
+
+        }
+
+#endif
 
 }
