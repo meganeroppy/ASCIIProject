@@ -52,7 +52,7 @@ public class StageManager : NetworkBehaviour
                 return;
             }
 
-            transform.SetParent(baseImageTarget.transform, false);
+		//	root.transform.SetParent(baseImageTarget.transform, false);
             myBase = baseImageTarget.GetComponent<ImageTargetBehaviour>();
         }
     }
