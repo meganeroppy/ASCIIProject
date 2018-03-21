@@ -218,6 +218,9 @@ public class YvAudienceController : NetworkBehaviour
 		Debug.Log( emoteIdx == 0 ? "いいね！" : "微妙だね！");
 
 		CmdSendEmote( (EmoteEnum)emoteIdx, target.netId );
+
+		//演出
+		DistanceSensor.instance.ShowEmoteEffect();
 	}
 
 	/// <summary>
@@ -301,9 +304,10 @@ public class YvAudienceController : NetworkBehaviour
 		}
 		else
 		{
+			int uiIndex = d.currentFocusIndex -1;
 			for( int i=0 ; i < uiSet.Length ; ++i )
 			{
-				uiSet[i].SetActive( i == d.currentFocusIndex );
+				uiSet[i].SetActive( i == uiIndex );
 			}
 
 			// ボタンを有効にする
@@ -335,6 +339,8 @@ public class YvAudienceController : NetworkBehaviour
 			Debug.LogWarning( "インデックス " + idx.ToString() +  "のTuberが存在しない");
 			return "";
 		}
+
+		Debug.LogWarning( "インデックス " + idx.ToString() +  "のTuberはNetId=" + result.netId.ToString() );
 
 		return result.netId.ToString();
 	}

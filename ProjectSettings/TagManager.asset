@@ -3,7 +3,11 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Target_A
+  - Target_C
+  - Target_B
+  - Target_Player
   layers:
   - Default
   - TransparentFX

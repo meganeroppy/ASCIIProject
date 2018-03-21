@@ -1213,9 +1213,10 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4563450516569402}
+  - component: {fileID: 136303957624163288}
   m_Layer: 0
   m_Name: Model
-  m_TagString: Untagged
+  m_TagString: Target_Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5212,6 +5213,19 @@ MonoBehaviour:
     i15: 135
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 1
+--- !u!136 &136303957624163288
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1434379543025916}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.35
+  m_Height: 1.79
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.89, z: 0}
 --- !u!137 &137115077016504668
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

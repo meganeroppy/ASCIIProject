@@ -23,8 +23,8 @@ public class DistanceSensor : MonoBehaviour
 	private float timer = 0;
 
 	[SerializeField]
-	private GameObject particle;
-	public GameObject Particle { get {  return particle;} }
+	private ParticleAttraction particle;
+	public ParticleAttraction Particle { get {  return particle;} }
 
 	[SerializeField]
 	private GameObject loveTarget;
@@ -33,6 +33,7 @@ public class DistanceSensor : MonoBehaviour
 	[SerializeField]
 	private ScoreController scoreController;
 	public ScoreController ScoreController { get {  return scoreController;} }
+
 	/// <summary>
 	/// フォーカス中なしは -1
 	/// </summary>
@@ -63,9 +64,18 @@ public class DistanceSensor : MonoBehaviour
             distance = hit.distance;
 
             //Rayが当たったオブジェクトのtagがPlayerだったら
-            if (hit.collider.tag == "Target_A")
-            {
+			if (hit.collider.tag == "Target_Player")
+			{
 				currentFocusIndex = 0;
+				//    Canvas_flowerA.SetActive(true);
+				//    Canvas_flowerB.SetActive(false);
+				//    Canvas_flowerC.SetActive(false);
+
+				Debug.Log("Target_A:"+distance);
+			}
+			else if (hit.collider.tag == "Target_A")
+            {
+				currentFocusIndex = 1;
             //    Canvas_flowerA.SetActive(true);
             //    Canvas_flowerB.SetActive(false);
             //    Canvas_flowerC.SetActive(false);
@@ -74,7 +84,7 @@ public class DistanceSensor : MonoBehaviour
             }
             else if (hit.collider.tag == "Target_B")
             {
-				currentFocusIndex = 1;
+				currentFocusIndex = 2;
             //    Canvas_flowerA.SetActive(false);
             //    Canvas_flowerB.SetActive(true);
             //    Canvas_flowerC.SetActive(false);
@@ -83,7 +93,7 @@ public class DistanceSensor : MonoBehaviour
             }
             else if(hit.collider.tag == "Target_C")
             {
-				currentFocusIndex = 2;
+				currentFocusIndex = 3;
 
             //    Canvas_flowerA.SetActive(false);
             //    Canvas_flowerB.SetActive(false);
@@ -114,4 +124,18 @@ public class DistanceSensor : MonoBehaviour
         }
 
     }
+
+	public void ShowEmoteEffect()
+	{
+		Debug.Log("インデックス" + currentFocusIndex.ToString() + " のプレイヤーにエモートを送信します ");
+
+		var target = YvTuberController.tuberList.Find( t => t.BaseIndex == currentFocusIndex );
+		if( target != null )
+		{
+			particle.Target = target.transform;
+			particle.gameObject.SetActive( true );
+
+			particle.GetComponent<ParticleSystem>().Play();
+		}
+	}
 }

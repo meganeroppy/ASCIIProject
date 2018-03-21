@@ -1224,7 +1224,7 @@ GameObject:
   - component: {fileID: 136513566383686038}
   m_Layer: 0
   m_Name: Model
-  m_TagString: Target_B
+  m_TagString: Target_C
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

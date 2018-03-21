@@ -896,7 +896,7 @@ GameObject:
   - component: {fileID: 136947782701173666}
   m_Layer: 0
   m_Name: Model
-  m_TagString: Target_C
+  m_TagString: Target_A
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
