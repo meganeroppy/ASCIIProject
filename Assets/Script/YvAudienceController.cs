@@ -307,6 +307,10 @@ public class YvAudienceController : NetworkBehaviour
 			{
 				b.gameObject.SetActive(false);
 			}
+
+			// テキスト非表示
+			scoreText.gameObject.SetActive(false);
+
 		}
 		else
 		{
@@ -322,6 +326,12 @@ public class YvAudienceController : NetworkBehaviour
 				b.gameObject.SetActive(true);
 				b.interactable = true;
 			}
+
+			// テキスト表示
+			scoreText.gameObject.SetActive(true);
+
+			// 切り替え時は表示スコアをすぐ更新
+			scoreUpdateTimer = scoreUpdateInterval;
 		}
 
 		// チャンネルに変換
@@ -347,7 +357,7 @@ public class YvAudienceController : NetworkBehaviour
                 val = tuber.LikeCount;
             }
 
-            scoreText.text = "Score : " + val.ToString();
+            scoreText.text = "Love Score : " + val.ToString();
 
         }
     }
