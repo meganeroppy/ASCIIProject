@@ -367,6 +367,8 @@ GameObject:
   - component: {fileID: 114634800859989816}
   - component: {fileID: 114956876649763328}
   - component: {fileID: 114645318471318480}
+  - component: {fileID: 95805831830664108}
+  - component: {fileID: 114084011850519804}
   m_Layer: 0
   m_Name: PlayerTuberDummyIdle1
   m_TagString: Untagged
@@ -892,7 +894,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4370571431743972}
-  - component: {fileID: 95239492980050184}
   - component: {fileID: 136947782701173666}
   m_Layer: 0
   m_Name: Model
@@ -5219,15 +5220,15 @@ Transform:
   m_Father: {fileID: 4086100018237466}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &95239492980050184
+--- !u!95 &95805831830664108
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1354929158036528}
+  m_GameObject: {fileID: 1145078786467650}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: b7072069ef247124680bbbd284a48ba2, type: 3}
+  m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: ab31639c81fde744ea5a20b2f4e5390e, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
@@ -5272,6 +5273,25 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &114084011850519804
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1145078786467650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1590678366, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Animator: {fileID: 95805831830664108}
+  m_ParameterSendBits: 3
+  param0: 
+  param1: 
+  param2: 
+  param3: 
+  param4: 
+  param5: 
 --- !u!114 &114634800859989816
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5366,30 +5386,30 @@ SkinnedMeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: bbf1387475d6cac4f8d8e9c2971d3fb8, type: 2}
-  - {fileID: 2100000, guid: 4ddee65dc7275ea49a3e14380237d10e, type: 2}
-  - {fileID: 2100000, guid: e93623f5dbf3ecf44a8cab6e55dab45f, type: 2}
-  - {fileID: 2100000, guid: 4851bcb407d393342a5d19a9c843bad7, type: 2}
-  - {fileID: 2100000, guid: 1d526229156a18e45816aacc5f363459, type: 2}
-  - {fileID: 2100000, guid: 64b68ceef389f8941ae40cbf4d6a8a5b, type: 2}
-  - {fileID: 2100000, guid: 3c3d10781acd67f4faee3b75231a484f, type: 2}
-  - {fileID: 2100000, guid: 54948c1742081bb43b8da5dd454cd014, type: 2}
-  - {fileID: 2100000, guid: 020c9af6eeaa5094db4ebd12eebc13ce, type: 2}
-  - {fileID: 2100000, guid: 0e2827ecc29f2094396907eccfbc583d, type: 2}
-  - {fileID: 2100000, guid: 7912b62ef10a6784caf2cec281c25c25, type: 2}
-  - {fileID: 2100000, guid: ff87e2953d59dff4f9d5dc9a522a9c31, type: 2}
-  - {fileID: 2100000, guid: 31c2539e95cdfd148ace9ebf08f41164, type: 2}
-  - {fileID: 2100000, guid: e9444623890b5b2448e38303ef6e7906, type: 2}
-  - {fileID: 2100000, guid: cb46ce689dd948c47bf588ec168d265c, type: 2}
-  - {fileID: 2100000, guid: 645a5e834593d7a439d9aaf1cdca28a4, type: 2}
-  - {fileID: 2100000, guid: bacf6c8d0ae43ba4d8a83209f5b92c4d, type: 2}
-  - {fileID: 2100000, guid: 69bbc3eaa7e73424a8b689f65a2a1757, type: 2}
-  - {fileID: 2100000, guid: 8bbdcacad57778e4ebf44987f61851a6, type: 2}
-  - {fileID: 2100000, guid: dc755285a552bc047b03f3f122fb9769, type: 2}
-  - {fileID: 2100000, guid: 3c63acbf42b196f459aaabf0b1cc4698, type: 2}
-  - {fileID: 2100000, guid: d9768449a8c00ca41b6737bec4d46d33, type: 2}
-  - {fileID: 2100000, guid: 338ccc83fced84648b88ee7367c8c3a8, type: 2}
-  - {fileID: 2100000, guid: 68a6374c684639a44bba6eb1a0a91187, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5607,26 +5627,26 @@ SkinnedMeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 45ca778e008b8ad47b86f4dc997e470f, type: 2}
-  - {fileID: 2100000, guid: 1f83ae6f7b207e644b481cc752a33404, type: 2}
-  - {fileID: 2100000, guid: 67c3cdea668b60c42ad1141815706009, type: 2}
-  - {fileID: 2100000, guid: 2caf6f145d80cb54dad1571bafe758e2, type: 2}
-  - {fileID: 2100000, guid: 6eeed5c8f86c94549a755ee91c69b8e3, type: 2}
-  - {fileID: 2100000, guid: d02ad412ef07d5b49988ba9e385d8199, type: 2}
-  - {fileID: 2100000, guid: 7926ac62d94288a4ba9cc165d9d626fb, type: 2}
-  - {fileID: 2100000, guid: 40fcfe54d373570469eb1308ea4cf5b0, type: 2}
-  - {fileID: 2100000, guid: 93da64f999101ea4e9263d1a4242ab6e, type: 2}
-  - {fileID: 2100000, guid: c2b2d114686d03744861d4cd6286626e, type: 2}
-  - {fileID: 2100000, guid: 61a3ddd9796db614dbd77ac3ac3540a2, type: 2}
-  - {fileID: 2100000, guid: 8b98eaf8f2d67814da42b81764a38a29, type: 2}
-  - {fileID: 2100000, guid: 3a87753ab453d9b42bb81056aa347afe, type: 2}
-  - {fileID: 2100000, guid: 57d6435b46e76d041b62d3d54b6a8ec8, type: 2}
-  - {fileID: 2100000, guid: 4daa673644072dc44b70b3b213e1b323, type: 2}
-  - {fileID: 2100000, guid: 2fd729a63b4cc324e9050ff77e26b189, type: 2}
-  - {fileID: 2100000, guid: 4ceb5616d52934a459bce33212d363bb, type: 2}
-  - {fileID: 2100000, guid: a4061bba69560e249a9d6460b283bae7, type: 2}
-  - {fileID: 2100000, guid: 3e0633d459e625d4fa49a632b4d2780c, type: 2}
-  - {fileID: 2100000, guid: c1ad025c208c83642b6e6e33170663d7, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
