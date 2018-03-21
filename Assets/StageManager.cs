@@ -17,8 +17,28 @@ public class StageManager : NetworkBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update () {
-		
-	}
+    [Client]
+    public override void OnStartClient()
+    {
+        base.OnStartClient();
+
+        if(NetworkScript.instance.AppType == NetworkScript.AppTypeEnum.Audience)
+        {
+            // 自身が来場者プレイヤーの場合
+
+            // 最初は非表示
+            root.SetActive(false);
+
+            var baseImageTarget = YvGameManager.instance.StageBase;
+            if (baseImageTarget == null)
+            {
+                Debug.LogError("ステージベースが存在しない");
+                return;
+            }
+
+            transform.SetParent(baseImageTarget.transform, false);
+        //    myBase = baseImageTarget.GetComponent<ImageTargetBehaviour>();
+        }
+    }
+
 }

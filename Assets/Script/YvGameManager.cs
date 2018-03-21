@@ -56,6 +56,7 @@ public class YvGameManager : NetworkBehaviour
     /// </summary>
     [SerializeField]
     private ImageTargetBehaviour stageBase;
+    public ImageTargetBehaviour StageBase { get { return stageBase; } }
 
     // Use this for initialization
     void Awake ()
@@ -94,7 +95,7 @@ public class YvGameManager : NetworkBehaviour
 	}
 
 	[Client]
-	public ImageTargetBehaviour GetBase( int index )
+	public ImageTargetBehaviour GetTuberBase( int index )
 	{
 		if( tuberDummyBase.Length <= index )
 		{

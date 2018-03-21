@@ -101,7 +101,7 @@ public class YvTuberController : NetworkBehaviour
 			// 最初は非表示
 			modelRoot.SetActive( false );
 
-			var baseImageTarget = YvGameManager.instance.GetBase( baseIndex );
+			var baseImageTarget = YvGameManager.instance.GetTuberBase( baseIndex );
 			if( baseImageTarget == null ) 	
 			{
 				Debug.LogError( baseIndex.ToString() + "に該当するベースが存在しない" );
