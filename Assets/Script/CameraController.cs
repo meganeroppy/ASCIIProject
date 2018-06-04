@@ -51,7 +51,7 @@ public class CameraController : MonoBehaviour
 	float extPosXMid;
 
 	[SerializeField]
-	bool extPosXReverse = true;
+	bool posXReverse = true;
 
 	[SerializeField]
 	bool log = false;
@@ -95,7 +95,14 @@ public class CameraController : MonoBehaviour
 
 			if( source == null ) return;
 
-			x = Mathf.InverseLerp( -refferedObjectRate, refferedObjectRate, source.transform.position.x);
+			var posX = source.transform.position.x;
+
+			if( posXReverse )
+			{
+				posX *= -1;
+			}
+
+			x = Mathf.InverseLerp( -refferedObjectRate, refferedObjectRate, posX);
 			y = Mathf.InverseLerp( -refferedObjectRate, refferedObjectRate, source.transform.position.y);
 
 			//Debug.Log( source.transform.position.x.ToString() + ", " + source.transform.position.y.ToString() + "  ->  " + x.ToString() + ", " + y.ToString() );
@@ -110,7 +117,7 @@ public class CameraController : MonoBehaviour
 			extPosXMid =  extPosXMin + ((extPosXMax - extPosXMin) * 0.5f);
 
 			var posX = UDPParser.parsedData.x - extPosXMid;
-			if( extPosXReverse )
+			if( posXReverse )
 			{
 				posX *= -1;
 			}

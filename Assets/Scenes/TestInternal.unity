@@ -662,6 +662,9 @@ MonoBehaviour:
   referredObject: {fileID: 2070281571}
   refferedObjectRate: 2000
   offsetLimit: {x: 0.3, y: 0.1}
+  extPosXMin: 200
+  extPosXMax: 1000
+  posXReverse: 1
   log: 0
 --- !u!1 &751411269
 GameObject:
