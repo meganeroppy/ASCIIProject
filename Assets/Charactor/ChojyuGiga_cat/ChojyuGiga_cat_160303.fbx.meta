@@ -1,0 +1,156 @@
+fileFormatVersion: 2
+guid: 9f385c56f053e814cad2711150746386
+timeCreated: 1488250167
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: 0.!joint_Master
+    100002: 1.!joint_Center
+    100004: 10.joint_LeftHip
+    100006: 11.joint_LeftKnee
+    100008: 12.joint_LeftFoot
+    100010: 13.joint_LeftToe
+    100012: 14.joint_Torso
+    100014: 15.joint_Torso2
+    100016: 16.joint_Neck
+    100018: 17.joint_Head
+    100020: 18.joint_kuchi
+    100022: 19.!joint_hidarimimi
+    100024: 2.!joint_guru^bu
+    100026: 20.joint_migimimi
+    100028: 21.joint_RightShoulder
+    100030: 22.joint_RightArm
+    100032: 23.joint_RightElbow
+    100034: 24.joint_RightWrist
+    100036: 25.joint_RightIndex1
+    100038: 26.joint_LeftShoulder
+    100040: 27.joint_LeftArm
+    100042: 28.joint_LeftElbow
+    100044: 29.joint_LeftWrist
+    100046: 3.!joint_Waist
+    100048: 30.joint_LeftIndex1
+    100050: 31.!IK_LeftHip
+    100052: 32.!IK_LeftToe
+    100054: 33.!IK_RightHip
+    100056: 34.!IK_RightToe
+    100058: 35.!Root
+    100060: 4.joint_HipMaster
+    100062: 5.joint_shitsu_
+    100064: 6.joint_RightHip
+    100066: 7.joint_RightKnee
+    100068: 8.joint_RightFoot
+    100070: 9.joint_RightToe
+    100072: //RootNode
+    100074: U_Char
+    400000: 0.!joint_Master
+    400002: 1.!joint_Center
+    400004: 10.joint_LeftHip
+    400006: 11.joint_LeftKnee
+    400008: 12.joint_LeftFoot
+    400010: 13.joint_LeftToe
+    400012: 14.joint_Torso
+    400014: 15.joint_Torso2
+    400016: 16.joint_Neck
+    400018: 17.joint_Head
+    400020: 18.joint_kuchi
+    400022: 19.!joint_hidarimimi
+    400024: 2.!joint_guru^bu
+    400026: 20.joint_migimimi
+    400028: 21.joint_RightShoulder
+    400030: 22.joint_RightArm
+    400032: 23.joint_RightElbow
+    400034: 24.joint_RightWrist
+    400036: 25.joint_RightIndex1
+    400038: 26.joint_LeftShoulder
+    400040: 27.joint_LeftArm
+    400042: 28.joint_LeftElbow
+    400044: 29.joint_LeftWrist
+    400046: 3.!joint_Waist
+    400048: 30.joint_LeftIndex1
+    400050: 31.!IK_LeftHip
+    400052: 32.!IK_LeftToe
+    400054: 33.!IK_RightHip
+    400056: 34.!IK_RightToe
+    400058: 35.!Root
+    400060: 4.joint_HipMaster
+    400062: 5.joint_shitsu_
+    400064: 6.joint_RightHip
+    400066: 7.joint_RightKnee
+    400068: 8.joint_RightFoot
+    400070: 9.joint_RightToe
+    400072: //RootNode
+    400074: U_Char
+    4300000: U_Char
+    7400000: wavefile_full_lat_vmd
+    7400002: wavefile_full_miku_v2_vmd
+    9500000: //RootNode
+    13700000: U_Char
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
