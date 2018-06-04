@@ -153,16 +153,14 @@ public class YvTuberController : NetworkBehaviour
     {
 		if( !isLocalPlayer ) return;
 
+		// iKinema入力が有効のときはそちらの入力を優先
         if (NetworkScript.instance.EnableIKinema) return;
-
-        // iKinema対応したら体と両足も対応する
 
         if ( stCamera == null )
         {
             stCamera = SteamVR_Camera.instance;
             if (stCamera == null) return;
         }
-
 
         // 頭 回転のみ
         if(stCamera.camera != null )

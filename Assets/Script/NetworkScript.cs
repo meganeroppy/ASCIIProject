@@ -29,7 +29,8 @@ public class NetworkScript : NetworkManager
 
 	/// <summary>
 	/// 実況者スクリプトでViveによる入力を無視するか？（＝キーボード入力を受け付けるか？）
-	/// 基本false Viveがないデバッグ時などは適宜true
+	/// 展示環境では基本false Viveがないデバッグ時などは適宜true
+	/// 実況者専用
 	/// </summary>
 	[SerializeField]
 	private bool ignoreViveTracking;
@@ -37,10 +38,12 @@ public class NetworkScript : NetworkManager
 
 	/// <summary>
 	/// 特定の実況者との距離がこの値以下になったらその実況者をフォーカス対象とする
+	/// 来場者専用
 	/// </summary>
 	[SerializeField]
 	private float focusChangeThreshold = 1f;
 	public float FocusChangeThreshold{get{return focusChangeThreshold;}}
+
 
     [SerializeField]
     private bool enableIKinema = true;
@@ -142,8 +145,6 @@ public class NetworkScript : NetworkManager
     /// <summary>
     /// 生成プレハブを変えるためにオーバーライド
     /// </summary>
-    /// <param name="conn"></param>
-    /// <param name="playerControllerId"></param>
     public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId, NetworkReader extraMessageReader) // ←第3引数があるバージョンに変更します
     {
         PlayerInfoMessage msg = extraMessageReader.ReadMessage<PlayerInfoMessage>();
@@ -181,6 +182,9 @@ public class NetworkScript : NetworkManager
         NetworkServer.AddPlayerForConnection(conn, player, playerControllerId);
     }
 
+	/// <summary>
+	/// クライアントがサーバー（またはホスト）に接続した時に呼ばれる
+	/// </summary>
     public override void OnClientConnect(NetworkConnection conn)
     {
         Debug.Log(System.Reflection.MethodBase.GetCurrentMethod());
