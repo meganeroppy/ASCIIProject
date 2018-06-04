@@ -92,6 +92,10 @@ public class NetworkScript : NetworkManager
 	[SerializeField]
 	private bool disableAutoConnectAsAudienceClient = false;
 
+	[SerializeField]
+	private bool createDummyTubers = true;
+	public bool CreateDummyTubers{get{ return createDummyTubers; }}
+
 	void Start () 
 	{
 		instance = this;

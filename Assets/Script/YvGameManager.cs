@@ -76,39 +76,50 @@ public class YvGameManager : NetworkBehaviour
     void Awake ()
     {
         instance = this;
-	}
 
+		cameraRig.SetActive(false);
+	}
+		
 	void Start()
 	{
+		Debug.Log("GameManager.Start()");
+
 		if( isServer )
 		{
-			// ダミーを生成する
-			for( int i=0 ; i < tuberDummyPrefabs.Length ; ++i )
+			if( NetworkScript.instance.CreateDummyTubers )
 			{
-				var tuber = Instantiate( tuberDummyPrefabs[i] );
+				// ダミーを生成する
+				for( int i=0 ; i < tuberDummyPrefabs.Length ; ++i )
+				{
+					var tuber = Instantiate( tuberDummyPrefabs[i] );
 
-				// サーバー上に生成
-				NetworkServer.Spawn( tuber.gameObject );
+					// サーバー上に生成
+					NetworkServer.Spawn( tuber.gameObject );
+				}
+
+	            // ステージを生成
+	        //    var stage = Instantiate(stagePrefab);
+	        //    NetworkServer.Spawn(stage.gameObject);
 			}
-
-            // ステージを生成
-        //    var stage = Instantiate(stagePrefab);
-        //    NetworkServer.Spawn(stage.gameObject);        
 		}
 
-        // 自分が実況者でなければカメラリグその他を無効
-        if (NetworkScript.instance.AppType != NetworkScript.AppTypeEnum.Tuber)
+        // 自分が実況者のとき
+        if (NetworkScript.instance.AppType == NetworkScript.AppTypeEnum.Tuber)
         {
-            cameraRig.SetActive(false);
+			// カメラリグ有効
+			cameraRig.SetActive(true);
+
+			// 実況者の時はイメージターゲットなどVuforia関連を無効
+			foreach (GameObject g in objectsNotForTuber)
+			{
+				g.SetActive(false);
+			}
         }
-        else
-        {
-            // 実況者の時はイメージターゲットなどVuforia関連を無効
-            foreach (GameObject g in objectsNotForTuber)
-            {
-                g.SetActive(false);
-            }
-        }
+		else
+		{
+			// 実況者でなければカメラリグ無効
+			cameraRig.SetActive(false);
+		}
     }
 	
 	// Update is called once per frame

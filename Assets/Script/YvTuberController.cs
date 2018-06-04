@@ -88,7 +88,6 @@ public class YvTuberController : NetworkBehaviour
         YvGameManager.instance.ArCamera.SetActive(false);
     }
 
-
 	[Client]
 	public override void OnStartClient ()
 	{
@@ -168,7 +167,6 @@ public class YvTuberController : NetworkBehaviour
             ik.headObj.transform.rotation = stCamera.camera.transform.rotation;
         }
 
-
         if (stController == null)
         {
             stController = SteamVR_ControllerManager.instance;
@@ -186,8 +184,8 @@ public class YvTuberController : NetworkBehaviour
             ik.leftHandObj.transform.position = stController.left.transform.position;
             ik.leftHandObj.transform.rotation = stController.left.transform.rotation;
         }
-
     }
+
     /// <summary>
     /// 入力更新
     /// </summary>
@@ -265,6 +263,16 @@ public class YvTuberController : NetworkBehaviour
 			// ローカルに保存
 			PlayerPrefs.SetInt( "TuberBad" + baseIndex.ToString(), disLikeCount );
 		}
+	}
+
+	public void OnCallChangeFace()
+	{
+		Debug.Log( System.Reflection.MethodBase.GetCurrentMethod() );
+	}
+
+	public void OnCallMusicPlay()
+	{
+		Debug.Log( System.Reflection.MethodBase.GetCurrentMethod() );
 	}
 
 }

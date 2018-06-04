@@ -351,12 +351,18 @@ public class YvAudienceController : NetworkBehaviour
 
             int val = 0;
             // スコア
-            var tuber = YvTuberController.tuberList.Find(t => t.netId.ToString() == currentFocusChannel);
-            if (tuber != null)
-            {
-                val = tuber.LikeCount;
-            }
-
+			if( YvTuberController.tuberList == null )
+			{
+				val = 0;
+			}
+			else
+			{
+	            var tuber = YvTuberController.tuberList.Find(t => t.netId.ToString() == currentFocusChannel);
+	            if (tuber != null)
+	            {
+	                val = tuber.LikeCount;
+	            }
+			}
             scoreText.text = "Love Score : " + val.ToString();
 
         }
