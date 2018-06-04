@@ -96,9 +96,16 @@ public class NetworkScript : NetworkManager
 	private bool createDummyTubers = true;
 	public bool CreateDummyTubers{get{ return createDummyTubers; }}
 
+	string IpAddressSaveKey = "IpAddress";
+
 	void Start () 
 	{
 		instance = this;
+
+		// 保存済み　接続先アドレスを保存
+		{
+			inputField.text = PlayerPrefs.GetString(IpAddressSaveKey);
+		}
 
         //    dualTouchControls = GameObject.Find("DualTouchControls");
 
@@ -129,10 +136,15 @@ public class NetworkScript : NetworkManager
 		if (!string.IsNullOrEmpty(inputField.text))
 		{
 			networkAddress = inputField.text;
+
+			// セーブしておく
+			var str = inputField.text;
+			PlayerPrefs.SetString( IpAddressSaveKey, str );
 		}
 
 		canvas.gameObject.SetActive(false);
 		var client = StartClient();
+
 		//    dualTouchControls.SetActive(true);
 		Debug.Log(client.serverIp);
 		Debug.Log(client.serverPort);
