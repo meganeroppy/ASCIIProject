@@ -7,6 +7,10 @@ using UnityEngine.Networking;
 using Vuforia;
 #endif
 
+/// <summary>
+/// 実況者のプレハブ
+/// ARモードとサイネージモード共通
+/// </summary>
 public class YvTuberController : NetworkBehaviour
 {
 	/// <summary>
@@ -95,7 +99,7 @@ public class YvTuberController : NetworkBehaviour
 
 		if( NetworkScript.instance.Role == NetworkScript.RoleEnum.Tuber ) 
 		{		
-			// 自身も実況者の場合
+			// このプレハブが生成されたクライアントも実況者の場合
 
 			// 自分自身でなければ非表示
 			modelRoot.SetActive( false );
@@ -105,19 +109,23 @@ public class YvTuberController : NetworkBehaviour
             // 自身が来場者プレイヤーの場合
 #if UNITY_ANDROID || UNITY_EDITOR
 
-            // 最初は非表示
-            modelRoot.SetActive( false );
+            // ARモードの時の処理
+            if (NetworkScript.instance.AppType == NetworkScript.AppTypeEnum.AR)
+            {
+                // 最初は非表示
+                modelRoot.SetActive( false );
 
-			var baseImageTarget = YvARGameManager.instance.GetTuberBase( baseIndex );
-			if( baseImageTarget == null ) 	
-			{
-				Debug.LogError( baseIndex.ToString() + "に該当するベースが存在しない" );
-				return;
-			}
+			    var baseImageTarget = YvARGameManager.instance.GetTuberBase( baseIndex );
+			    if( baseImageTarget == null ) 	
+			    {
+				    Debug.LogError( baseIndex.ToString() + "に該当するベースが存在しない" );
+				    return;
+			    }
 
-			transform.SetParent( baseImageTarget.transform, false );
+			    transform.SetParent( baseImageTarget.transform, false );
 
-            myBase = baseImageTarget.GetComponent<ImageTargetBehaviour>();
+                myBase = baseImageTarget.GetComponent<ImageTargetBehaviour>();
+            }
 #endif
         }
     }
@@ -212,32 +220,36 @@ public class YvTuberController : NetworkBehaviour
         }
     }
 
-	/// <summary>
-	/// AR上の挙動を更新
-	/// </summary>
-	[Client]
-	private void UpdateArBehaviour()
-	{
-		/// 対象は来場者環境のみ
-		if( NetworkScript.instance.Role != NetworkScript.RoleEnum.Audience ) return;
+    /// <summary>
+    /// AR上の挙動を更新
+    /// </summary>
+    [Client]
+    private void UpdateArBehaviour()
+    {
+        /// 対象は来場者環境のみ
+        if (NetworkScript.instance.Role != NetworkScript.RoleEnum.Audience) return;
 
 #if UNITY_ANDROID || UNITY_EDITOR
-        if (myBase == null)
-        {
-            Debug.LogWarning(gameObject.name + "はベースが未定義");
-            return;
-        }
+        // ARモードの時の処理
+        if (NetworkScript.instance.AppType == NetworkScript.AppTypeEnum.AR)
+        { 
+            if (myBase == null)
+            {
+                Debug.LogWarning(gameObject.name + "はベースが未定義");
+                return;
+            }
 
-        var newStatus = myBase.CurrentStatus;
-        if (newStatus != trackableStatusPrev)
-        {
-            Debug.Log(gameObject.name + "の表示切り替え :" + trackableStatusPrev.ToString() + " -> " + newStatus.ToString());
-            modelRoot.SetActive(myBase.CurrentStatus == TrackableBehaviour.Status.TRACKED
-                || myBase.CurrentStatus == TrackableBehaviour.Status.DETECTED
-                || myBase.CurrentStatus == TrackableBehaviour.Status.EXTENDED_TRACKED);
-        }
+            var newStatus = myBase.CurrentStatus;
+            if (newStatus != trackableStatusPrev)
+            {
+                Debug.Log(gameObject.name + "の表示切り替え :" + trackableStatusPrev.ToString() + " -> " + newStatus.ToString());
+                modelRoot.SetActive(myBase.CurrentStatus == TrackableBehaviour.Status.TRACKED
+                    || myBase.CurrentStatus == TrackableBehaviour.Status.DETECTED
+                    || myBase.CurrentStatus == TrackableBehaviour.Status.EXTENDED_TRACKED);
+            }
 
-        trackableStatusPrev = newStatus; 
+            trackableStatusPrev = newStatus;
+        }
 #endif
     }
 
@@ -245,9 +257,9 @@ public class YvTuberController : NetworkBehaviour
     /// エモートを受け取る
     /// </summary>
     [Server]
-	public void ReceiveEmote( YvAudienceController.EmoteEnum emote, NetworkInstanceId netId )
+	public void ReceiveEmote( YvARAudienceController.EmoteEnum emote, NetworkInstanceId netId )
 	{
-		if( emote == YvAudienceController.EmoteEnum.Like )
+		if( emote == YvARAudienceController.EmoteEnum.Like )
 		{
 			likeCount++;
 			Debug.Log( "NetId = " + netId.ToString() + " の来場者から NetId = " + this.netId.ToString() + "の実況者に「いいね！」がとどいた" );

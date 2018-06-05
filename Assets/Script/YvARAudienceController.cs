@@ -5,9 +5,10 @@ using UnityEngine.Networking;
 using UnityEngine.UI;
 
 /// <summary>
+/// ARモード時の
 /// 来場者のスクリプト
 /// </summary>
-public class YvAudienceController : NetworkBehaviour
+public class YvARAudienceController : NetworkBehaviour
 {
 	public enum EmoteEnum
 	{

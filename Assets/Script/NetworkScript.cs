@@ -81,7 +81,13 @@ public class NetworkScript : NetworkManager
     /// 来場者プレハブ
     /// </summary>
     [SerializeField]
-    private GameObject playerPrefabAudience;
+    private GameObject playerPrefabARAudience;
+
+    /// <summary>
+    /// 来場者プレハブ
+    /// </summary>
+    [SerializeField]
+    private GameObject playerPrefabSignageAudience;
 
     /// <summary>
     /// 自分自身の時でも自身のモデルを表示するか？
@@ -118,7 +124,7 @@ public class NetworkScript : NetworkManager
 	{
 		instance = this;
 
-		// 保存済み　接続先アドレスを保存
+		// 保存済み接続先アドレスを保存
 		{
 			inputField.text = PlayerPrefs.GetString(IpAddressSaveKey);
 		}
@@ -197,7 +203,7 @@ public class NetworkScript : NetworkManager
         }
         else
         {
-            playerPrefab = playerPrefabAudience;
+            playerPrefab = playerPrefabSignageAudience;
         }
 
         GameObject player;
