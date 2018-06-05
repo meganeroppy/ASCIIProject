@@ -84,8 +84,8 @@ public class YvAudienceController : NetworkBehaviour
 		base.OnStartClient ();
 
 		// 初期位置と回転を指定する
-		transform.position = YvGameManager.instance.AudienceOrigin.transform.position;
-		transform.rotation = YvGameManager.instance.AudienceOrigin.transform.rotation;
+		transform.position = YvARGameManager.instance.AudienceOrigin.transform.position;
+		transform.rotation = YvARGameManager.instance.AudienceOrigin.transform.rotation;
 
         // 最初はエモート送信ボタン無効
         foreach (Button b in emoteButtons)
@@ -100,7 +100,7 @@ public class YvAudienceController : NetworkBehaviour
 		base.OnStartLocalPlayer ();
 
 		// 自身をARカメラの子要素にする
-		transform.SetParent( YvGameManager.instance.ArCamera.transform, false ); 
+		transform.SetParent( YvARGameManager.instance.ArCamera.transform, false ); 
 	}
 
 	void Start()

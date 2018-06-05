@@ -45,7 +45,7 @@ public class StageManager : NetworkBehaviour
             // 最初は非表示
             root.SetActive(false);
 
-            var baseImageTarget = YvGameManager.instance.StageBase;
+            var baseImageTarget = YvARGameManager.instance.StageBase;
             if (baseImageTarget == null)
             {
                 Debug.LogError("ステージベースが存在しない");
