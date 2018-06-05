@@ -93,7 +93,7 @@ public class YvTuberController : NetworkBehaviour
 	{
 		base.OnStartClient ();
 
-		if( NetworkScript.instance.AppType == NetworkScript.AppTypeEnum.Tuber ) 
+		if( NetworkScript.instance.Role == NetworkScript.RoleEnum.Tuber ) 
 		{		
 			// 自身も実況者の場合
 
@@ -219,7 +219,7 @@ public class YvTuberController : NetworkBehaviour
 	private void UpdateArBehaviour()
 	{
 		/// 対象は来場者環境のみ
-		if( NetworkScript.instance.AppType != NetworkScript.AppTypeEnum.Audience ) return;
+		if( NetworkScript.instance.Role != NetworkScript.RoleEnum.Audience ) return;
 
 #if UNITY_ANDROID || UNITY_EDITOR
         if (myBase == null)

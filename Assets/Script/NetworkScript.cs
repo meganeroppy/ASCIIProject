@@ -16,16 +16,32 @@ public class NetworkScript : NetworkManager
     /// </summary>
     public enum AppTypeEnum
     {
+        AR,      // Vuforiaを使用し、マーカー上にTuberを表示させる
+        Signage,   // プラ板ディスプレイにTuberを表示
+    }
+
+    /// <summary>
+    /// 現在のアプリタイプ
+    /// </summary>
+    [SerializeField]
+    private AppTypeEnum appType;
+    public AppTypeEnum AppType { get { return appType; } }
+
+    /// <summary>
+    /// 役割タイプ
+    /// </summary>
+    public enum RoleEnum
+    {
         Tuber,      // 実況者
         Audience,   // 来場者（＝実況者を見る）
     }
 
     /// <summary>
-    /// 自身のアプリタイプ
+    /// 自身の役割タイプ
     /// </summary>
     [SerializeField]
-    private AppTypeEnum appType;
-    public AppTypeEnum AppType { get { return appType; } }
+    private RoleEnum role;
+    public RoleEnum Role { get { return role; } }
 
 	/// <summary>
 	/// 実況者スクリプトでViveによる入力を無視するか？（＝キーボード入力を受け付けるか？）
@@ -110,7 +126,7 @@ public class NetworkScript : NetworkManager
         //    dualTouchControls = GameObject.Find("DualTouchControls");
 
 		// 来場者アプリは即クライアントとして接続
-		if( AppType == AppTypeEnum.Audience && !disableAutoConnectAsAudienceClient )
+		if( Role == RoleEnum.Audience && !disableAutoConnectAsAudienceClient )
 		{
 			ConnectClient();
 		}
@@ -164,11 +180,11 @@ public class NetworkScript : NetworkManager
     public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId, NetworkReader extraMessageReader) // ←第3引数があるバージョンに変更します
     {
         PlayerInfoMessage msg = extraMessageReader.ReadMessage<PlayerInfoMessage>();
-        var appType = msg.appType;
+        var appType = msg.role;
 
         GameObject playerPrefab;
 
-        if (appType == AppTypeEnum.Tuber)
+        if (appType == RoleEnum.Tuber)
         {
             if (enableIKinema)
             {
@@ -209,7 +225,7 @@ public class NetworkScript : NetworkManager
 
         // PlayerInfoMessageオブジェクトを作成し、プレイヤーの情報を格納する
         PlayerInfoMessage msg = new PlayerInfoMessage();
-        msg.appType = AppType;
+        msg.role = Role;
 
         // サーバーにAddPlayerメッセージを送信する。
         // その際、第3引数に追加情報（PlayerInfoMessage）を付与する。
@@ -219,6 +235,6 @@ public class NetworkScript : NetworkManager
     // プレイヤー生成時に必要な情報をクライアントからサーバーへ送るための入れ物
     class PlayerInfoMessage : MessageBase
     {
-        public AppTypeEnum appType;
+        public RoleEnum role;
     }
 }

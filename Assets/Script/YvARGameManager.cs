@@ -104,7 +104,7 @@ public class YvARGameManager : NetworkBehaviour
 		}
 
         // 自分が実況者のとき
-        if (NetworkScript.instance.AppType == NetworkScript.AppTypeEnum.Tuber)
+        if (NetworkScript.instance.Role == NetworkScript.RoleEnum.Tuber)
         {
 			// カメラリグ有効
 			cameraRig.SetActive(true);

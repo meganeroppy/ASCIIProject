@@ -25,7 +25,7 @@ public class StageManager : NetworkBehaviour
     void Start()
     {
         // 自身がTuberの時は非表示
-        if( NetworkScript.instance.AppType == NetworkScript.AppTypeEnum.Tuber && !NetworkScript.instance.ForceDisplayStage)
+        if( NetworkScript.instance.Role == NetworkScript.RoleEnum.Tuber && !NetworkScript.instance.ForceDisplayStage)
         {
             root.SetActive(false);
         }
@@ -38,7 +38,7 @@ public class StageManager : NetworkBehaviour
     {
         base.OnStartClient();
 
-        if(NetworkScript.instance.AppType == NetworkScript.AppTypeEnum.Audience)
+        if(NetworkScript.instance.Role == NetworkScript.RoleEnum.Audience)
         {
             // 自身が来場者プレイヤーの場合
 
@@ -61,7 +61,7 @@ public class StageManager : NetworkBehaviour
 	void Update()
 	{
 		/// 対象は来場者環境のみ
-		if( NetworkScript.instance.AppType != NetworkScript.AppTypeEnum.Audience ) return;
+		if( NetworkScript.instance.Role != NetworkScript.RoleEnum.Audience ) return;
 
         if (myBase == null)
         {
