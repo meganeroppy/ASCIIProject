@@ -85,7 +85,7 @@ public class YvTuberController : NetworkBehaviour
         ik = GetComponent<IKControl>();
 
         // ARカメラを無効
-        YvGameManager.instance.ArCamera.SetActive(false);
+        YvARGameManager.instance.ArCamera.SetActive(false);
     }
 
 	[Client]

@@ -8,11 +8,11 @@ using Vuforia;
 #endif
 
 /// <summary>
-/// ネットワーク以外の部分の制御を行う
+/// AR表示モードの基本的な制御
 /// </summary>
-public class YvGameManager : NetworkBehaviour
+public class YvARGameManager : NetworkBehaviour
 {
-    public static YvGameManager instance;
+    public static YvARGameManager instance;
 
 	/// <summary>
 	/// 来場者プレハブのカメラがちゃんと動いていることが確認できたら削除
