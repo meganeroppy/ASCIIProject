@@ -115,7 +115,18 @@ public class YvTuberController : NetworkBehaviour
 				return;
 			}
 
-			transform.SetParent( baseImageTarget.transform, false );
+            if (baseImageTarget.transform.childCount > 0 && baseImageTarget.transform.GetChild(0).name.ToLower().Contains("base"))
+            {
+                var b = baseImageTarget.transform.GetChild(0).transform;
+                transform.SetParent(b, false);
+
+                var rate = 1f / b.localScale.x;
+                transform.transform.localScale = Vector3.one * rate;
+            }
+            else
+            {
+                transform.SetParent(baseImageTarget.transform, false);
+            }
 
             myBase = baseImageTarget.GetComponent<ImageTargetBehaviour>();
 #endif
