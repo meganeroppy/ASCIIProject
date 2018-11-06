@@ -115,6 +115,7 @@ public class YvTuberController : NetworkBehaviour
 				return;
 			}
 
+			// ベースのこ要素にする
             if (baseImageTarget.transform.childCount > 0 && baseImageTarget.transform.GetChild(0).name.ToLower().Contains("base"))
             {
                 var b = baseImageTarget.transform.GetChild(0).transform;
@@ -122,6 +123,18 @@ public class YvTuberController : NetworkBehaviour
 
                 var rate = 1f / b.localScale.x;
                 transform.transform.localScale = Vector3.one * rate;
+
+				// ダミーアリスがいたら無効
+				for( int i=0 ; i<b.transform.childCount ; ++i )
+				{
+
+					var child = b.transform.GetChild(i);
+					if( child.name.ToLower() == "dummyalice")
+					{
+						child.gameObject.SetActive(false);
+					}
+				}
+
             }
             else
             {
@@ -129,6 +142,7 @@ public class YvTuberController : NetworkBehaviour
             }
 
             myBase = baseImageTarget.GetComponent<ImageTargetBehaviour>();
+
 #endif
         }
     }

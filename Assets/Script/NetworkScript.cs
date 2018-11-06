@@ -82,7 +82,7 @@ public class NetworkScript : NetworkManager
     public bool ForceDisplayStage { get { return forceDisplayStage; } }
 
     [SerializeField]
-    public Canvas canvas;
+	public Transform canvas;
 
     [SerializeField]
     private InputField inputField;
@@ -221,4 +221,9 @@ public class NetworkScript : NetworkManager
     {
         public AppTypeEnum appType;
     }
+
+	public void EnablePanel()
+	{
+		canvas.gameObject.SetActive( !canvas.gameObject.activeInHierarchy );
+	}
 }
