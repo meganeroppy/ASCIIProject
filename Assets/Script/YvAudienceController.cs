@@ -99,9 +99,8 @@ public class YvAudienceController : NetworkBehaviour
 	{
 		base.OnStartLocalPlayer ();
 
-        // 自身をARカメラの子要素にする
-        if (YvGameManager.instance.ArCamera != null)
-            transform.SetParent( YvGameManager.instance.ArCamera.transform, false ); 
+		// 自身をARカメラの子要素にする
+		transform.SetParent( YvGameManager.instance.ArCamera.transform, false ); 
 	}
 
 	void Start()
