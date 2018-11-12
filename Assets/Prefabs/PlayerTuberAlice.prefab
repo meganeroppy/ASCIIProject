@@ -874,6 +874,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4062888104161554}
+  - component: {fileID: 114237014551452342}
   m_Layer: 0
   m_Name: Spine2
   m_TagString: Untagged
@@ -1281,6 +1282,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4296286171702560}
   - component: {fileID: 114878119074809144}
+  - component: {fileID: 114794451101141962}
   m_Layer: 0
   m_Name: secondary
   m_TagString: Untagged
@@ -5168,7 +5170,7 @@ Animator:
   m_GameObject: {fileID: 1264336924388126}
   m_Enabled: 1
   m_Avatar: {fileID: 90528324742145208, guid: 9e48ceeb51f8631438ff45786fa0fa8b, type: 2}
-  m_Controller: {fileID: 9100000, guid: 713533cf8795a4440bd875978b906e73, type: 2}
+  m_Controller: {fileID: 9100000, guid: bc9860b408132b34b96fdd91a82407fd, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -5185,7 +5187,7 @@ Animator:
   m_GameObject: {fileID: 1257269931567826}
   m_Enabled: 1
   m_Avatar: {fileID: 90528324742145208, guid: 9e48ceeb51f8631438ff45786fa0fa8b, type: 2}
-  m_Controller: {fileID: 9100000, guid: bc9860b408132b34b96fdd91a82407fd, type: 2}
+  m_Controller: {fileID: 9100000, guid: 713533cf8795a4440bd875978b906e73, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -5245,6 +5247,25 @@ MonoBehaviour:
   m_MovementThreshold: 0.001
   m_InterpolateRotation: 0.5
   m_InterpolateMovement: 0.5
+--- !u!114 &114237014551452342
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1342523549778572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 646b65a4a57afd34d8c4ed557efb46a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Colliders:
+  - Offset: {x: 0, y: 0, z: 0}
+    Radius: 0.1
+  - Offset: {x: 0, y: -0.1, z: 0}
+    Radius: 0.1
+  - Offset: {x: 0, y: -0.2, z: 0}
+    Radius: 0.1
+  m_gizmoColor: {r: 1, g: 0, b: 1, a: 1}
 --- !u!114 &114368309338226226
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5481,6 +5502,39 @@ MonoBehaviour:
   Avatar: {fileID: 90528324742145208, guid: 9e48ceeb51f8631438ff45786fa0fa8b, type: 2}
   Description: {fileID: 114932622468496264, guid: 9e48ceeb51f8631438ff45786fa0fa8b,
     type: 2}
+--- !u!114 &114794451101141962
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1511117127922258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00ea06e1753e16f4ca870c39c067c86b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_comment: clothes
+  m_drawGizmo: 0
+  m_gizmoColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  m_stiffnessForce: 1
+  m_gravityPower: 0
+  m_gravityDir: {x: 0, y: -1, z: 0}
+  m_dragForce: 0.4
+  m_center: {fileID: 0}
+  RootBones:
+  - {fileID: 4001873841227032}
+  - {fileID: 4359202088666656}
+  - {fileID: 4317887252043322}
+  - {fileID: 4725177566374956}
+  - {fileID: 4383798443515528}
+  - {fileID: 4158947914388758}
+  - {fileID: 4304252905686054}
+  - {fileID: 4067060933432858}
+  - {fileID: 4858370725531420}
+  - {fileID: 4048822496450384}
+  - {fileID: 4773090876080202}
+  m_hitRadius: 0.02
+  ColliderGroups: []
 --- !u!114 &114806923166458192
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5552,11 +5606,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00ea06e1753e16f4ca870c39c067c86b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_comment: 
+  m_comment: hair
   m_drawGizmo: 0
   m_gizmoColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   m_stiffnessForce: 1
-  m_gravityPower: 0
+  m_gravityPower: 1
   m_gravityDir: {x: 0, y: -1, z: 0}
   m_dragForce: 0.4
   m_center: {fileID: 0}
@@ -5575,19 +5629,9 @@ MonoBehaviour:
   - {fileID: 4280004890948460}
   - {fileID: 4510561945508490}
   - {fileID: 4099832424918352}
-  - {fileID: 4773090876080202}
-  - {fileID: 4001873841227032}
-  - {fileID: 4359202088666656}
-  - {fileID: 4317887252043322}
-  - {fileID: 4725177566374956}
-  - {fileID: 4383798443515528}
-  - {fileID: 4158947914388758}
-  - {fileID: 4304252905686054}
-  - {fileID: 4067060933432858}
-  - {fileID: 4858370725531420}
-  - {fileID: 4048822496450384}
   m_hitRadius: 0.02
-  ColliderGroups: []
+  ColliderGroups:
+  - {fileID: 114237014551452342}
 --- !u!114 &114962462189239944
 MonoBehaviour:
   m_ObjectHideFlags: 1
